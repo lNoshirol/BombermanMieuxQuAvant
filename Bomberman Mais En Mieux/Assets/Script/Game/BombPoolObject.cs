@@ -31,6 +31,12 @@ public class BombPoolObject : MonoBehaviour
             GameObject newBomb = Instantiate(bombPrefab);
             ResetBomb(newBomb);
         }
+
+        for (int i = 0;i < maxBombOnMap; i++)
+        {
+            //SpawnBomb();
+            //soon
+        }
     }
 
     public void SpawnBomb(GameObject theBomb)
