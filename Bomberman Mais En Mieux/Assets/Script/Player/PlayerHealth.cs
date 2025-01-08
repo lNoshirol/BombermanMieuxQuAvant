@@ -27,6 +27,6 @@ public class PlayerHealth : MonoBehaviour
 
     private void updateHealthUI()
     {
-        healthUI.text = pv.ToString();
+        healthUI.text = ($"{pv}pv");
     }
 }

@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class PlayerPickDrop : MonoBehaviour
 {
     [SerializeField] Transform bombeStock;
     private PlayerActions _playerInput;
     private GameObject bombe;
+
+    [SerializeField] TextMeshProUGUI bombeUI;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -17,6 +20,7 @@ public class PlayerPickDrop : MonoBehaviour
             other.gameObject.transform.SetParent(bombeStock);
             bombe = other.gameObject;
             Debug.Log("Attraper");
+            updateBombeUI();
         }
         else if(other.gameObject.tag == "Bombe" && bombeStock.childCount >= 3)
         {
@@ -55,12 +59,18 @@ public class PlayerPickDrop : MonoBehaviour
                     Transform bombeToDrop = bombeStock.GetChild(i);
                     Debug.Log(bombeToDrop);
                     bombeToDrop.parent = null;
+                    bombeToDrop.GetComponent<Renderer>().material.color = Color.red;
                     bombeToDrop.GetComponent<SphereCollider>().enabled = false;
                     bombeToDrop.GetComponent<Bombe>().StartExplosion();
+                    updateBombeUI();
                 }
             }
         }
-       
+    }
+
+    private void updateBombeUI()
+    {
+        bombeUI.text = ($"{bombeStock.childCount}/3");
     }
 
 }
