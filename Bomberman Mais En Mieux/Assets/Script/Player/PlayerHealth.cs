@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour
 {
     public float pv;
     [SerializeField] TextMeshProUGUI healthUI;
+    Bombe bombe;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -19,10 +20,14 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        Bombe bombe = GetComponent<Bombe>();
+    }
 
     private void takeDamage()
     {
-        pv--;
+        pv=pv-bombe.bombeDamage;
     }
 
     private void updateHealthUI()
