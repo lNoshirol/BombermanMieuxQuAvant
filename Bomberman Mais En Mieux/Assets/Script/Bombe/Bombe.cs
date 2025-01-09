@@ -33,7 +33,7 @@ public class Bombe : MonoBehaviour
         }
         Debug.Log("Boom");
         bombeExploRadius.SetActive(true);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.25f);
         gameObject.SetActive(false);
     }
 }

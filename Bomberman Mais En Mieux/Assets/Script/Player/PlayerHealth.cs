@@ -11,10 +11,11 @@ public class PlayerHealth : MonoBehaviour
     Collider playerCollider;
     Renderer playerRenderer;
     Color baseColor;
+    bool invincible = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "DamageRadius")
+        if (other.gameObject.tag == "DamageRadius" && !invincible)
         {
             takeDamage();
             updateHealthUI();
@@ -42,13 +43,15 @@ public class PlayerHealth : MonoBehaviour
 
     private IEnumerator Invicibility()
     {
-        playerRenderer.material.color = Color.red;
+        invincible = true;
+        playerRenderer.material.color = Color.black;
         Debug.Log("switchcolor");
         yield return new WaitForSeconds(0.25f);
         playerRenderer.material.color = baseColor;
         yield return new WaitForSeconds(0.25f);
-        playerRenderer.material.color = Color.red;
+        playerRenderer.material.color = Color.black;
         yield return new WaitForSeconds(0.25f);
         playerRenderer.material.color = baseColor;
+        invincible = false;
     }
 }

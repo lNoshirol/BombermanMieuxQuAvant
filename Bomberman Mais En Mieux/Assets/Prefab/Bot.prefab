@@ -418,7 +418,6 @@ GameObject:
   - component: {fileID: 2323304924234988370}
   - component: {fileID: 4344579104474122578}
   - component: {fileID: 2045086576717465618}
-  - component: {fileID: 1754260192650043737}
   - component: {fileID: 6532930640452474898}
   - component: {fileID: 3278240288730010547}
   - component: {fileID: 7894866169825548443}
@@ -519,19 +518,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1754260192650043737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4850394299608676577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6a46b3275a6704cab2bae939b9a08a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  goal: {fileID: 0}
 --- !u!195 &6532930640452474898
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -594,6 +580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bombeStock: {fileID: 3281463308901084116}
+  botFindBombe: {fileID: 857009182195064109}
   bombeUI: {fileID: 4118876108246191363}
 --- !u!114 &7314664164718010384
 MonoBehaviour:
@@ -622,5 +609,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fa1a96960468db45851334c21a6b302, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AllBombes: []
+  AllBombesList: []
   NearestBombe: {fileID: 0}
+  navigation: {fileID: 6532930640452474898}

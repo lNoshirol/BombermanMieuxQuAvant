@@ -9,7 +9,7 @@ public class PlayerJoin : MonoBehaviour
     private void Awake()
     {
         playerJoinManager = PlayerJoinManager.instance;
-        transform.position = playerJoinManager.playerSpawnPoint[playerJoinManager.playerThatJoined-1].position;
+        transform.position = playerJoinManager.playerSpawnPoint[playerJoinManager.playerThatJoined-1].position; 
         GetComponent<MeshRenderer>().material = playerJoinManager.playersMat[playerJoinManager.playerThatJoined - 1];
     }
 }

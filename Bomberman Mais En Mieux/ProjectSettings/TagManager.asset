@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Bombe
   - DamageRadius
+  - Bot
   layers:
   - Default
   - TransparentFX

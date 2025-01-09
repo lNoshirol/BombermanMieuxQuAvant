@@ -7,7 +7,7 @@ public class BotPickup : MonoBehaviour
 {
     [SerializeField] Transform bombeStock;
     private GameObject bombe;
-    [SerializeField] BotFindBombe botFindBombe;
+    [SerializeField] BotBRAIN botFindBombe;
 
     [SerializeField] TextMeshProUGUI bombeUI;
     // Start is called before the first frame update
@@ -26,16 +26,26 @@ public class BotPickup : MonoBehaviour
     {
         if (other.gameObject.tag == "Bombe" && bombeStock.childCount < 3)
         {
-            other.transform.position = bombeStock.position;
-            other.gameObject.transform.SetParent(bombeStock);
             bombe = other.gameObject;
+            bombe.GetComponent<Bombe>().canBeGrab = false;
+            bombe.transform.position = bombeStock.position;
+            bombe.transform.SetParent(bombeStock);
+            bombe.GetComponent<Collider>().isTrigger = false;
             Debug.Log("Attraper");
-            botFindBombe.FindNearestBombe();
-
+            botFindBombe.UseBigBrainIA();
+            updateBombeUI();
         }
         else if (other.gameObject.tag == "Bombe" && bombeStock.childCount >= 3)
         {
             Debug.Log("Plus de place dans le sac mon coco");
         }
     }
+
+    private void updateBombeUI()
+    {
+        bombeUI.text = ($"{bombeStock.childCount}/3");
+    }
+
+
+
 }
