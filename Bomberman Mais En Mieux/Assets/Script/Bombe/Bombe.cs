@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bombe : MonoBehaviour
 {
     [SerializeField] GameObject bombeExploRadius;
+    public int bombeDamage;
     // Start is called before the first frame update
     void Start()
     {
