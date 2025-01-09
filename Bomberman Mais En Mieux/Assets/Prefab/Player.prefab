@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 517817810818449668}
   - component: {fileID: 6710231672499059763}
   - component: {fileID: 2697661232908750162}
+  - component: {fileID: 1139392085207567655}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -197,6 +198,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 5c1f1e6a-0e36-4ae1-abdb-d5328d596f25
     m_ActionName: Keyboard/Drop[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fc825e0e-4765-48c7-9680-fab451162361
+    m_ActionName: Keyboard/setPause
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Keyboard
@@ -244,6 +249,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pv: 3
   healthUI: {fileID: 6644523104796510440}
+--- !u!114 &1139392085207567655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046032257268557040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df47d86f03d90234b85c674c42ee9df3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1630766226948195325
 GameObject:
   m_ObjectHideFlags: 0

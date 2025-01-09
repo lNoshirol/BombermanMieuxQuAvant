@@ -44,6 +44,15 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""setPause"",
+                    ""type"": ""Button"",
+                    ""id"": ""fc825e0e-4765-48c7-9680-fab451162361"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -104,12 +113,45 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""d1e78299-acec-44c7-8de3-a3ac623001a9"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""d9c5c7c7-14ec-4649-98a8-c1bc3403c50d"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Drop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f7eb3340-873b-4440-8a1e-357b6f3ecd18"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8cf6e09b-50fd-4374-a471-f0942986deb9"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""setPause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -122,6 +164,7 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
         m_Keyboard = asset.FindActionMap("Keyboard", throwIfNotFound: true);
         m_Keyboard_Move = m_Keyboard.FindAction("Move", throwIfNotFound: true);
         m_Keyboard_Drop = m_Keyboard.FindAction("Drop", throwIfNotFound: true);
+        m_Keyboard_setPause = m_Keyboard.FindAction("setPause", throwIfNotFound: true);
     }
 
     ~@PlayerActions()
@@ -190,12 +233,14 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     private List<IKeyboardActions> m_KeyboardActionsCallbackInterfaces = new List<IKeyboardActions>();
     private readonly InputAction m_Keyboard_Move;
     private readonly InputAction m_Keyboard_Drop;
+    private readonly InputAction m_Keyboard_setPause;
     public struct KeyboardActions
     {
         private @PlayerActions m_Wrapper;
         public KeyboardActions(@PlayerActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Keyboard_Move;
         public InputAction @Drop => m_Wrapper.m_Keyboard_Drop;
+        public InputAction @setPause => m_Wrapper.m_Keyboard_setPause;
         public InputActionMap Get() { return m_Wrapper.m_Keyboard; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -211,6 +256,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Drop.started += instance.OnDrop;
             @Drop.performed += instance.OnDrop;
             @Drop.canceled += instance.OnDrop;
+            @setPause.started += instance.OnSetPause;
+            @setPause.performed += instance.OnSetPause;
+            @setPause.canceled += instance.OnSetPause;
         }
 
         private void UnregisterCallbacks(IKeyboardActions instance)
@@ -221,6 +269,9 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
             @Drop.started -= instance.OnDrop;
             @Drop.performed -= instance.OnDrop;
             @Drop.canceled -= instance.OnDrop;
+            @setPause.started -= instance.OnSetPause;
+            @setPause.performed -= instance.OnSetPause;
+            @setPause.canceled -= instance.OnSetPause;
         }
 
         public void RemoveCallbacks(IKeyboardActions instance)
@@ -242,5 +293,6 @@ public partial class @PlayerActions: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnDrop(InputAction.CallbackContext context);
+        void OnSetPause(InputAction.CallbackContext context);
     }
 }

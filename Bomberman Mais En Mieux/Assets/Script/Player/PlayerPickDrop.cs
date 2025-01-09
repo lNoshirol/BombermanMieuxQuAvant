@@ -45,6 +45,7 @@ public class PlayerPickDrop : MonoBehaviour
 
     public void OnDrop(InputAction.CallbackContext callbackContext)
     {
+        Debug.Log("clique");
         if (callbackContext.started)
         {
             if (bombeStock.childCount < 1)
@@ -53,6 +54,7 @@ public class PlayerPickDrop : MonoBehaviour
             }
             else
             {
+                Debug.Log("DROOOOOOOOOOOOOP");
                 for (int i = 0; i < 1; i++)
                 {
                     Debug.Log("Je drop");
