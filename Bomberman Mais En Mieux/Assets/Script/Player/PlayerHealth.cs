@@ -7,7 +7,10 @@ public class PlayerHealth : MonoBehaviour
 {
     public float pv;
     [SerializeField] TextMeshProUGUI healthUI;
-    Bombe bombe;
+    [SerializeField] int damageMultiplier;
+    Collider playerCollider;
+    Renderer playerRenderer;
+    Color baseColor;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -22,16 +25,30 @@ public class PlayerHealth : MonoBehaviour
 
     private void Start()
     {
-        Bombe bombe = GetComponent<Bombe>();
+        playerCollider = gameObject.GetComponent<Collider>();
+        playerRenderer = gameObject.GetComponent<Renderer>();
+        baseColor = playerRenderer.material.color;
     }
-
     private void takeDamage()
     {
-        pv=pv-bombe.bombeDamage;
+        pv=pv-damageMultiplier;
+        StartCoroutine(Invicibility());
     }
 
     private void updateHealthUI()
     {
         healthUI.text = ($"{pv}pv");
+    }
+
+    private IEnumerator Invicibility()
+    {
+        playerRenderer.material.color = Color.red;
+        Debug.Log("switchcolor");
+        yield return new WaitForSeconds(0.25f);
+        playerRenderer.material.color = baseColor;
+        yield return new WaitForSeconds(0.25f);
+        playerRenderer.material.color = Color.red;
+        yield return new WaitForSeconds(0.25f);
+        playerRenderer.material.color = baseColor;
     }
 }

@@ -19,6 +19,7 @@ public class PlayerPickDrop : MonoBehaviour
             other.transform.position = bombeStock.position;
             other.gameObject.transform.SetParent(bombeStock);
             bombe = other.gameObject;
+            bombe.GetComponent<Bombe>().canBeGrab = false; ;
             Debug.Log("Attraper");
             updateBombeUI();
         }
@@ -45,7 +46,6 @@ public class PlayerPickDrop : MonoBehaviour
 
     public void OnDrop(InputAction.CallbackContext callbackContext)
     {
-        Debug.Log("clique");
         if (callbackContext.started)
         {
             if (bombeStock.childCount < 1)
@@ -54,18 +54,13 @@ public class PlayerPickDrop : MonoBehaviour
             }
             else
             {
-                Debug.Log("DROOOOOOOOOOOOOP");
-                for (int i = 0; i < 1; i++)
-                {
                     Debug.Log("Je drop");
-                    Transform bombeToDrop = bombeStock.GetChild(i);
+                    Transform bombeToDrop = bombeStock.GetChild(0);
                     Debug.Log(bombeToDrop);
                     bombeToDrop.parent = null;
-                    bombeToDrop.GetComponent<Renderer>().material.color = Color.red;
                     bombeToDrop.GetComponent<SphereCollider>().enabled = false;
                     bombeToDrop.GetComponent<Bombe>().StartExplosion();
                     updateBombeUI();
-                }
             }
         }
     }
