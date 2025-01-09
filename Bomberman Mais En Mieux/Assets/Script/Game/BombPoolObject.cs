@@ -1,6 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class BombPoolObject : MonoBehaviour
@@ -11,6 +10,9 @@ public class BombPoolObject : MonoBehaviour
     private int maxBombOnMap = 5;
 
     [SerializeField] List<Transform> bombSpawnPointList;
+
+    [SerializeField] List<GameObject> bombInPool;
+    [SerializeField] List<GameObject> bombInUse;
 
     private void Awake()
     {
@@ -24,7 +26,7 @@ public class BombPoolObject : MonoBehaviour
         }
     }
 
-    private void Start()
+    private async void Start()
     {
         for (int i = 0; i < maxBombOnMap+3; i++) //we create more bombs just in case
         {
@@ -32,17 +34,24 @@ public class BombPoolObject : MonoBehaviour
             ResetBomb(newBomb);
         }
 
-        for (int i = 0;i < maxBombOnMap; i++)
+        for (int i = 0; i < maxBombOnMap; i++)
         {
-            //SpawnBomb();
-            //soon
+            SpawnBomb(bombInPool[0]);
+            await Task.Delay(1000);
         }
     }
 
     public void SpawnBomb(GameObject theBomb)
     {
-        theBomb.transform.position = bombSpawnPointList[Random.Range(0, bombSpawnPointList.Count)].position;
-        theBomb.transform.parent = null;
+        bombInPool.Remove(theBomb);
+        bombInUse.Add(theBomb);
+        Transform spawnPoint = bombSpawnPointList[Random.Range(0, bombSpawnPointList.Count)];
+        while (spawnPoint.childCount != 0)
+        {
+            spawnPoint = bombSpawnPointList[Random.Range(0, bombSpawnPointList.Count)];
+        }
+        theBomb.transform.position = spawnPoint.position;
+        theBomb.transform.parent = spawnPoint;
         theBomb.SetActive(true);
     }
 
@@ -52,5 +61,6 @@ public class BombPoolObject : MonoBehaviour
         theBomb.transform.position = Vector3.zero;
         theBomb.transform.rotation = Quaternion.identity;
         theBomb.transform.parent = transform;
+        bombInPool.Add(theBomb);
     }
 }
