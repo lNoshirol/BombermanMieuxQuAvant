@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bombe : MonoBehaviour
 {
     [SerializeField] GameObject bombeExploRadius;
-    public int bombeDamage;
+    public bool canBeGrab = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +20,7 @@ public class Bombe : MonoBehaviour
 
     public void StartExplosion()
     {
+        gameObject.GetComponent<Renderer>().material.color = Color.yellow;
         StartCoroutine(Explosion());
     }
 
