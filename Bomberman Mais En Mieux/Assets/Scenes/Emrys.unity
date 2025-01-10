@@ -3517,6 +3517,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bombe (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 2148799247982249558, guid: 314050e1af4fd804b8bda8cef2e4ac70,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f59273e53d92a2b4880b90d4cbae0cc8, type: 2}
     - target: {fileID: 4656491993143299350, guid: 314050e1af4fd804b8bda8cef2e4ac70,
         type: 3}
       propertyPath: m_LocalPosition.x

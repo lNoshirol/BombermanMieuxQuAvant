@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6433ca61add96c04a87d16c7069ea633, type: 2}
+  - {fileID: 2100000, guid: f59273e53d92a2b4880b90d4cbae0cc8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bombeExploRadius: {fileID: 5021282458660158635}
-  bombeDamage: 1
+  canBeGrab: 0
 --- !u!1 &5021282458660158635
 GameObject:
   m_ObjectHideFlags: 0
