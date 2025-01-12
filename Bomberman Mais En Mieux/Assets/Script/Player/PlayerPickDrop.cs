@@ -11,6 +11,8 @@ public class PlayerPickDrop : MonoBehaviour
     private GameObject bombe;
 
     [SerializeField] TextMeshProUGUI bombeUI;
+    [SerializeField] BotBRAIN botBRAIN;
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -22,6 +24,8 @@ public class PlayerPickDrop : MonoBehaviour
             bombe.GetComponent<Bombe>().canBeGrab = false; ;
             Debug.Log("Attraper");
             updateBombeUI();
+            if(!botBRAIN == false)
+            botBRAIN.UseBigBrainIA();
         }
         else if(other.gameObject.tag == "Bombe" && bombeStock.childCount >= 3)
         {
