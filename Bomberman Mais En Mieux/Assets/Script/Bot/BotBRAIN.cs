@@ -20,7 +20,7 @@ public class BotBRAIN : MonoBehaviour
         {
             AllBombesList.Add(bombe);
         }
-        FindNearestBombe();
+        UseBigBrainIA();
         player = GameObject.FindWithTag("Player");
     }
 
@@ -30,18 +30,21 @@ public class BotBRAIN : MonoBehaviour
         {
             FindPlayer();
         }
+        else
+        {
+            BOTFindNearestBombe();
+        }
     }
     public void UseBigBrainIA()
     {
         if (bombeStock.childCount < 3)
         {
-            FindNearestBombe();
+            BOTFindNearestBombe();
         }
     }
 
 
-
-    public void FindNearestBombe()
+    public void BOTFindNearestBombe()
     {
         Debug.Log("Je cherche");
         nearestDistance = float.MaxValue;
@@ -55,7 +58,7 @@ public class BotBRAIN : MonoBehaviour
             }
         }
         navigation.destination = NearestBombe.transform.position;
-        RemoveBombFromList();
+        //RemoveBombFromList();
 
 
     }
