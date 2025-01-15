@@ -44,7 +44,7 @@ public class PlayerHealth : MonoBehaviour
 
     private void updateHealthUI()
     {
-        healthUI.text = ($"{pv}pv");
+        healthUI.text = ($"{pv}");
     }
 
     private IEnumerator Invicibility()
