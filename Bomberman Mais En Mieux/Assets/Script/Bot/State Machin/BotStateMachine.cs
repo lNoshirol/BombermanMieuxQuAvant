@@ -10,12 +10,14 @@ public class BotStateMachine : MonoBehaviour
     public SearchBombState searchBombState = new();
     public RunAwayState runAwayState = new();
     public AttackState attackState = new();
+    public DeathState deathState = new();
 
     public BotBRAIN botBrain;
 
     private void Awake()
     {
         botBrain = GetComponent<BotBRAIN>();
+        GetComponent<PlayerHealth>().OnDamageTook += DamageTaken;
     }
 
     private void Start()
@@ -25,6 +27,8 @@ public class BotStateMachine : MonoBehaviour
 
     public void ChangeState(IBotState newState)
     {
+        if (currentState == deathState) return;
+
         if (currentState != null)
         {
             currentState.OnExit(this);
@@ -37,6 +41,14 @@ public class BotStateMachine : MonoBehaviour
     private void Update()
     {
         currentState.StateUpdate();
+    }
+
+    public void DamageTaken(int pv)
+    {
+        if (pv == 0)
+        {
+            ChangeState(deathState);
+        }
     }
 }
 

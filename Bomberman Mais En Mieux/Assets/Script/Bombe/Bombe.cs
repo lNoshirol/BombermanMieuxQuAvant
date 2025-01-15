@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,9 @@ public class Bombe : MonoBehaviour
 {
     [SerializeField] GameObject bombeExploRadius;
     public bool canBeGrab = true;
+
+    public event Action<GameObject> OnKaboom;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +38,13 @@ public class Bombe : MonoBehaviour
         Debug.Log("Boom");
         bombeExploRadius.SetActive(true);
         yield return new WaitForSeconds(0.25f);
-        gameObject.SetActive(false);
+
+        OnKaboom.Invoke(gameObject);
+    }
+
+    public void ResetOwnValue()
+    {
+        canBeGrab = true;
+        bombeExploRadius.SetActive(false);
     }
 }

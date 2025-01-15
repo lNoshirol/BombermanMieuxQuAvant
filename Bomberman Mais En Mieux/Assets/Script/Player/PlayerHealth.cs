@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public float pv;
+    public int pv;
     [SerializeField] TextMeshProUGUI healthUI;
     [SerializeField] int damageMultiplier;
     Collider playerCollider;
     Renderer playerRenderer;
     Color baseColor;
     bool invincible = false;
+
+    public event Action<int> OnDamageTook;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -33,6 +36,9 @@ public class PlayerHealth : MonoBehaviour
     private void takeDamage()
     {
         pv=pv-damageMultiplier;
+
+        OnDamageTook?.Invoke(pv);
+
         StartCoroutine(Invicibility());
     }
 

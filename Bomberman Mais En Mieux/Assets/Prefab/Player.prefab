@@ -235,6 +235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bombeStock: {fileID: 3463297890183062269}
   bombeUI: {fileID: 5483275141015588899}
+  botBRAIN: {fileID: 0}
 --- !u!114 &2697661232908750162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,6 +250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pv: 3
   healthUI: {fileID: 6644523104796510440}
+  damageMultiplier: 1
 --- !u!114 &1139392085207567655
 MonoBehaviour:
   m_ObjectHideFlags: 0

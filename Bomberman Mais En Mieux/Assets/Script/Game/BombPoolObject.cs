@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -31,6 +32,7 @@ public class BombPoolObject : MonoBehaviour
         for (int i = 0; i < maxBombOnMap+3; i++) //we create more bombs just in case
         {
             GameObject newBomb = Instantiate(bombPrefab);
+            newBomb.GetComponent<Bombe>().OnKaboom += Oskour;
             ResetBomb(newBomb);
         }
 
@@ -61,6 +63,22 @@ public class BombPoolObject : MonoBehaviour
         theBomb.transform.position = Vector3.zero;
         theBomb.transform.rotation = Quaternion.identity;
         theBomb.transform.parent = transform;
+        theBomb.GetComponent<Bombe>().ResetOwnValue();
+        bombInUse.Remove(theBomb);
         bombInPool.Add(theBomb);
+    }
+
+    public void Oskour(GameObject theBomb)
+    {
+        Debug.Log("ET LA C BON");
+        StartCoroutine(BombExplode(theBomb));
+    }
+
+    IEnumerator BombExplode(GameObject theBomb)
+    {
+        ResetBomb(theBomb);
+        //await Task.Delay(1500);
+        yield return new WaitForSeconds(1.5f);
+        SpawnBomb(bombInPool[0]);
     }
 }

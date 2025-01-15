@@ -13,7 +13,6 @@ public class SearchBombState : IBotState
         _pool = BombPoolObject.instance;
 
         _stateMachine = botStateMachine;
-        _stateMachine.currentState = this;
         _brain = _stateMachine.botBrain;
     }
 
