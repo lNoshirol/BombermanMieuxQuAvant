@@ -9,7 +9,7 @@ public class BotBRAIN : MonoBehaviour
     public GameObject NearestBombe;
     float distance;
     float nearestDistance;
-    GameObject player;
+    public GameObject player;
     public NavMeshAgent navigation;
     [SerializeField] Transform bombeStock;
 
@@ -20,12 +20,14 @@ public class BotBRAIN : MonoBehaviour
         {
             AllBombesList.Add(bombe);
         }
-        UseBigBrainIA();
+        //UseBigBrainIA();
         player = GameObject.FindWithTag("Player");
     }
 
     private void Update()
     {
+        return;
+
         if(bombeStock.childCount == 3)
         {
             FindPlayer();
@@ -47,12 +49,15 @@ public class BotBRAIN : MonoBehaviour
     public void BOTFindNearestBombe()
     {
         Debug.Log("Je cherche");
-        nearestDistance = float.MaxValue;
-        for (int i = 0; i < AllBombesList.Count; i++) { 
-        distance = Vector2.Distance(this.transform.position, AllBombesList[i].transform.position);
+        nearestDistance = Vector2.Distance(this.transform.position, BombPoolObject.instance.bombInUse[0].transform.position);
 
-            if (distance < nearestDistance && AllBombesList[i].GetComponent<Bombe>().canBeGrab == true) {
-                NearestBombe = AllBombesList[i];
+        for (int i = 0; i < BombPoolObject.instance.bombInUse.Count; i++) 
+        { 
+            distance = Vector2.Distance(this.transform.position, BombPoolObject.instance.bombInUse[i].transform.position);
+
+            if (distance <= nearestDistance /*&& BombPoolObject.instance.bombInUse[i].GetComponent<Bombe>().canBeGrab == true*/) 
+            {
+                NearestBombe = BombPoolObject.instance.bombInUse[i];
                 nearestDistance = distance;
                 Debug.Log("BombeFind");
             }
@@ -72,5 +77,10 @@ public class BotBRAIN : MonoBehaviour
     {
         Debug.Log("J'attaque le joueur");
         navigation.destination = player.transform.position;
+    }
+
+    public int GetBombNumber()
+    {
+        return bombeStock.childCount;
     }
 }
