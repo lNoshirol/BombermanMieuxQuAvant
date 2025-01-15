@@ -1,50 +1,58 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Bombe : MonoBehaviour
 {
-    [SerializeField] GameObject bombeExploRadius;
+    [SerializeField] List<Transform> radius = new List<Transform>();
     public bool canBeGrab = true;
-
-    public event Action<GameObject> OnKaboom;
-
+    Renderer _renderer;
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        foreach (Transform child in transform)
+        radius.Add(child);
+        _renderer = gameObject.GetComponent<Renderer>();
+        //StartCoroutine(StartExplosion());
     }
 
     public void StartExplosion()
     {
-        gameObject.GetComponent<Renderer>().material.color = Color.yellow;
-        StartCoroutine(Explosion());
+        StartCoroutine(WaitAndExplosion());
     }
 
-    private IEnumerator Explosion()
+    private IEnumerator WaitAndExplosion()
     {
-        for(int i = 3;  i > 0; i--)
+        gameObject.GetComponent<Renderer>().material.color = Color.yellow;
+        for (int i = 3; i > 0; i--)
         {
             Debug.Log($"Explosion dans {i}...");
             yield return new WaitForSeconds(1f);
         }
         Debug.Log("Boom");
-        bombeExploRadius.SetActive(true);
-        yield return new WaitForSeconds(0.25f);
-
-        OnKaboom.Invoke(gameObject);
+        StartCoroutine(Explosion());
     }
 
-    public void ResetOwnValue()
+    private IEnumerator Explosion()
     {
-        canBeGrab = true;
-        bombeExploRadius.SetActive(false);
+        _renderer.enabled = false;
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(true);
+            yield return new WaitForSeconds(0.10f);
+            //child.gameObject.SetActive(false);
+            //yield return new WaitForSeconds(0.25f);
+        }
+        yield return new WaitForSeconds(0.5f);
+        gameObject.SetActive(false);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "DamageRadius" && other.transform.root.gameObject.GetComponent<Bombe>().canBeGrab)
+        {
+            Debug.Log("HAHAIJD");
+            StartCoroutine(Explosion());
+        }
     }
 }
