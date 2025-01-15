@@ -11,6 +11,7 @@ public class PlayerJoinManager : MonoBehaviour
     public List<Transform> playerSpawnPoint;
     public List<Material> playersMat;
 
+    public GameObject theBot;
 
     private void Awake()
     {

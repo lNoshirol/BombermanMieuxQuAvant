@@ -11,6 +11,15 @@ public class AttackState : IBotState
 
     }
 
+    public void StateUpdate()
+    {
+        if (this == _stateMachine.currentState)
+        {
+
+        }
+    }
+
+
     public void OnExit(BotStateMachine botStateMachine)
     {
 

@@ -12,7 +12,7 @@ public class BombPoolObject : MonoBehaviour
     [SerializeField] List<Transform> bombSpawnPointList;
 
     [SerializeField] List<GameObject> bombInPool;
-    [SerializeField] List<GameObject> bombInUse;
+    public List<GameObject> bombInUse;
 
     private void Awake()
     {

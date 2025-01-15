@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using Unity.VisualScripting;
 
 public class PlayerPickDrop : MonoBehaviour
 {
@@ -74,4 +75,8 @@ public class PlayerPickDrop : MonoBehaviour
         bombeUI.text = ($"{bombeStock.childCount}/3");
     }
 
+    public int GetBombNumber()
+    {
+        return bombeStock.childCount;
+    }
 }
