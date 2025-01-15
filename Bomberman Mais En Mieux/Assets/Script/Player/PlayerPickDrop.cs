@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
-using Unity.VisualScripting;
+using System;
 
 public class PlayerPickDrop : MonoBehaviour
 {
@@ -14,6 +14,7 @@ public class PlayerPickDrop : MonoBehaviour
     [SerializeField] TextMeshProUGUI bombeUI;
     [SerializeField] BotBRAIN botBRAIN;
 
+    public event Action<GameObject> OndropBomb;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -59,13 +60,14 @@ public class PlayerPickDrop : MonoBehaviour
             }
             else
             {
-                    Debug.Log("Je drop");
-                    Transform bombeToDrop = bombeStock.GetChild(0);
-                    Debug.Log(bombeToDrop);
-                    bombeToDrop.parent = null;
-                    bombeToDrop.GetComponent<SphereCollider>().enabled = false;
-                    bombeToDrop.GetComponent<Bombe>().StartExplosion();
-                    updateBombeUI();
+                Debug.Log("Je drop");
+                Transform bombeToDrop = bombeStock.GetChild(0);
+                Debug.Log(bombeToDrop);
+                bombeToDrop.parent = null;
+                bombeToDrop.GetComponent<SphereCollider>().enabled = false;
+                bombeToDrop.GetComponent<Bombe>().StartExplosion();
+                updateBombeUI();
+                OndropBomb?.Invoke(bombeToDrop.gameObject);
             }
         }
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -17,7 +18,7 @@ public class BotStateMachine : MonoBehaviour
     private void Awake()
     {
         botBrain = GetComponent<BotBRAIN>();
-        GetComponent<PlayerHealth>().OnDamageTook += DamageTaken;
+        GetComponent<PlayerHealth>().OnDamageTake += DamageTaken;
     }
 
     private void Start()
@@ -49,6 +50,16 @@ public class BotStateMachine : MonoBehaviour
         {
             ChangeState(deathState);
         }
+    }
+
+    public float DistanceFromClosestDanger()
+    {
+        return botBrain.DistanceBetweenBotAndTarget(botBrain.ClosestMenace());
+    }
+
+    public bool IsInDanger()
+    {
+        return DistanceFromClosestDanger() < botBrain.dangerZone;
     }
 }
 

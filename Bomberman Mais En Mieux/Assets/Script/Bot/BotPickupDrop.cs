@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -10,16 +11,14 @@ public class BotPickup : MonoBehaviour
     [SerializeField] BotBRAIN botFindBombe;
 
     [SerializeField] TextMeshProUGUI bombeUI;
+
+    public event Action<GameObject> OndropBomb;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        OndropBomb += GetComponent<BotBRAIN>().ABombHasBeenPlanted;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -46,6 +45,23 @@ public class BotPickup : MonoBehaviour
         bombeUI.text = ($"{bombeStock.childCount}/3");
     }
 
-
+    public void BotDropBomb()
+    {
+        if (bombeStock.childCount < 1)
+        {
+            Debug.Log("Pas de bombe à poser");
+        }
+        else
+        {
+            Debug.Log("Je drop");
+            Transform bombeToDrop = bombeStock.GetChild(0);
+            Debug.Log(bombeToDrop);
+            bombeToDrop.parent = null;
+            bombeToDrop.GetComponent<SphereCollider>().enabled = false;
+            bombeToDrop.GetComponent<Bombe>().StartExplosion();
+            updateBombeUI();
+            OndropBomb?.Invoke(bombeToDrop.gameObject);
+        }
+    }
 
 }

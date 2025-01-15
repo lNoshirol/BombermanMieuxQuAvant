@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,12 +8,18 @@ public class Bombe : MonoBehaviour
     [SerializeField] List<Transform> radius = new List<Transform>();
     public bool canBeGrab = true;
     Renderer _renderer;
+    private Color _baseColor;
+
+    public event Action<GameObject> OnKaboom;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         foreach (Transform child in transform)
         radius.Add(child);
         _renderer = gameObject.GetComponent<Renderer>();
+        _baseColor = _renderer.material.color;
+
         //StartCoroutine(StartExplosion());
     }
 
@@ -44,7 +51,9 @@ public class Bombe : MonoBehaviour
             //yield return new WaitForSeconds(0.25f);
         }
         yield return new WaitForSeconds(0.5f);
-        gameObject.SetActive(false);
+
+        OnKaboom?.Invoke(gameObject);
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -54,5 +63,17 @@ public class Bombe : MonoBehaviour
             Debug.Log("HAHAIJD");
             StartCoroutine(Explosion());
         }
+    }
+
+    public void ResetOwnValue()
+    {
+        canBeGrab = true;
+        _renderer.enabled = true;
+        _renderer.material.color = _baseColor;
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+        GetComponent<SphereCollider>().enabled = true;
     }
 }

@@ -5,28 +5,31 @@ using UnityEngine;
 public class SearchBombState : IBotState
 {
     private BotStateMachine _stateMachine;
-    private BombPoolObject _pool;
     private BotBRAIN _brain;
+    private PlayerPickDrop _playerPickDrop;
 
     public void OnEnter(BotStateMachine botStateMachine)
     {
-        _pool = BombPoolObject.instance;
-
         _stateMachine = botStateMachine;
         _brain = _stateMachine.botBrain;
+        _playerPickDrop = _brain.player.GetComponent<PlayerPickDrop>();
     }
 
     public void StateUpdate()
     {
         if (this == _stateMachine.currentState && _brain.player != null)
         {
-            if (_brain.GetBombNumber() == 0 || (_brain.GetBombNumber() < _brain.player.GetComponent<PlayerPickDrop>().GetBombNumber()))
+            if (_brain.GetBombNumber() == 0 || (_brain.GetBombNumber() < _playerPickDrop.GetBombNumber()))
             {
                 _brain.BOTFindNearestBombe();
             }
-            else if (_brain.GetBombNumber() > 0 && _brain.GetBombNumber() >= _brain.player.GetComponent<PlayerPickDrop>().GetBombNumber())
+            else if (_brain.GetBombNumber() > 0 && _brain.GetBombNumber() >= _playerPickDrop.GetBombNumber())
             {
-                Debug.Log("je peux attaquer");
+                _stateMachine.ChangeState(_stateMachine.attackState);
+            }
+            else if (_stateMachine.IsInDanger())
+            {
+                _stateMachine.ChangeState(_stateMachine.runAwayState);
             }
         }
     }

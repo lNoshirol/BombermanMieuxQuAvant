@@ -14,7 +14,7 @@ public class PlayerHealth : MonoBehaviour
     Color baseColor;
     bool invincible = false;
 
-    public event Action<int> OnDamageTook;
+    public event Action<int> OnDamageTake;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -37,7 +37,7 @@ public class PlayerHealth : MonoBehaviour
     {
         pv=pv-damageMultiplier;
 
-        OnDamageTook?.Invoke(pv);
+        OnDamageTake?.Invoke(pv);
 
         StartCoroutine(Invicibility());
     }

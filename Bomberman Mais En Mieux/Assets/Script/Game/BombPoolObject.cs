@@ -15,6 +15,7 @@ public class BombPoolObject : MonoBehaviour
     [SerializeField] List<GameObject> bombInPool;
     public List<GameObject> bombInUse;
 
+
     private void Awake()
     {
         if (instance == null)
@@ -33,6 +34,7 @@ public class BombPoolObject : MonoBehaviour
         {
             GameObject newBomb = Instantiate(bombPrefab);
             newBomb.GetComponent<Bombe>().OnKaboom += Oskour;
+            newBomb.name = "bombe";
             ResetBomb(newBomb);
         }
 
@@ -47,10 +49,10 @@ public class BombPoolObject : MonoBehaviour
     {
         bombInPool.Remove(theBomb);
         bombInUse.Add(theBomb);
-        Transform spawnPoint = bombSpawnPointList[Random.Range(0, bombSpawnPointList.Count)];
+        Transform spawnPoint = bombSpawnPointList[UnityEngine.Random.Range(0, bombSpawnPointList.Count)];
         while (spawnPoint.childCount != 0)
         {
-            spawnPoint = bombSpawnPointList[Random.Range(0, bombSpawnPointList.Count)];
+            spawnPoint = bombSpawnPointList[UnityEngine.Random.Range(0, bombSpawnPointList.Count)];
         }
         theBomb.transform.position = spawnPoint.position;
         theBomb.transform.parent = spawnPoint;

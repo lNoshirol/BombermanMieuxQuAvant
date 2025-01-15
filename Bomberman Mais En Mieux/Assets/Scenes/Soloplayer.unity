@@ -3347,7 +3347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91b2fe086bddf9947a57ed90714679a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombPrefab: {fileID: 1609405929320864704, guid: 314050e1af4fd804b8bda8cef2e4ac70,
+  bombPrefab: {fileID: 1609405929320864704, guid: 947f466f50319e549bc23d1c4a0d55a3,
     type: 3}
   bombSpawnPointList:
   - {fileID: 1855178675}

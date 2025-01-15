@@ -25,6 +25,7 @@ public class DeathState : IBotState
 
     public void OnExit(BotStateMachine stateMachine)
     {
-
+        Debug.Log("What do you think you're doing ?... \n nobody can escape the DeathState");
+        stateMachine.currentState = stateMachine.deathState;
     }
 }
