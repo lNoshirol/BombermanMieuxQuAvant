@@ -42,6 +42,7 @@ public class BotStateMachine : MonoBehaviour
     private void Update()
     {
         currentState.StateUpdate();
+        Debug.LogError(currentState.ToString());
     }
 
     public void DamageTaken(int pv)

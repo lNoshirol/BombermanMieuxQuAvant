@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,17 +6,33 @@ using UnityEngine.AI;
 
 public class BotBRAIN : MonoBehaviour
 {
-    public List<GameObject> AllBombesList = new List<GameObject>();
+    [Header("Public")]
+    [Foldout("List")]
+    public List<GameObject> AllBombesList = new();
+    [Foldout("List")]
     public List<GameObject> thingsToRunAway = new();
 
+    [Foldout("GameObject")]
     public GameObject NearestBombe;
-    float distance;
-    float nearestDistance;
+    [Foldout("GameObject")]
     public GameObject player;
+
+    [Foldout("NavMesh")]
     public NavMeshAgent navigation;
+
+    [Foldout("Int")]
+    public float dangerZone;
+
+
+    [Header("Private")]
+    [Foldout("Transform")]
     [SerializeField] Transform bombeStock;
 
-    public float dangerZone;
+    [Foldout("Debug")]
+    [SerializeField] float distance;
+
+    [Foldout("Debug")]
+    [SerializeField] float nearestDistance;
 
     // Start is called before the first frame update
     void Start()
@@ -28,16 +45,8 @@ public class BotBRAIN : MonoBehaviour
 
     private void Update()
     {
-        return;
+        
 
-        if(bombeStock.childCount == 3)
-        {
-            FindPlayer();
-        }
-        else
-        {
-            BOTFindNearestBombe();
-        }
     }
     public void UseBigBrainIA()
     {
@@ -54,7 +63,7 @@ public class BotBRAIN : MonoBehaviour
         nearestDistance = Vector2.Distance(this.transform.position, BombPoolObject.instance.bombInUse[0].transform.position);
 
         for (int i = 0; i < BombPoolObject.instance.bombInUse.Count; i++) 
-        { 
+        {
             distance = Vector2.Distance(this.transform.position, BombPoolObject.instance.bombInUse[i].transform.position);
 
             if (distance <= nearestDistance /*&& BombPoolObject.instance.bombInUse[i].GetComponent<Bombe>().canBeGrab == true*/) 
@@ -119,6 +128,7 @@ public class BotBRAIN : MonoBehaviour
         }
 
         navigation.SetDestination(fleePosition);
+        Debug.Log($"JE COURS VERS {fleePosition}");
     }
 
     public void AttackPlayer()
@@ -141,4 +151,6 @@ public class BotBRAIN : MonoBehaviour
         thingsToRunAway.Remove(bomb);
         bomb.GetComponent<Bombe>().OnKaboom -= ABombHasExplod;
     }
+
+    
 }

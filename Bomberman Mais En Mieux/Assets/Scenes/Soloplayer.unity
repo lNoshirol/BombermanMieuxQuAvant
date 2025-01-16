@@ -3187,6 +3187,11 @@ PrefabInstance:
       propertyPath: bombeStock
       value: 
       objectReference: {fileID: 1472487216}
+    - target: {fileID: 857009182195064109, guid: 73ef8ff798ae1004dba4159c8a78710e,
+        type: 3}
+      propertyPath: dangerZone
+      value: 4.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1133599253723243851, guid: 73ef8ff798ae1004dba4159c8a78710e,
         type: 3}
       propertyPath: m_LocalPosition.x
