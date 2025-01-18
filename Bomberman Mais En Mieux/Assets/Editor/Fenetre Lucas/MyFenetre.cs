@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 using NaughtyAttributes;
+using UnityEditor.SceneManagement;
 
 public class MyFenetre : EditorWindow
 {
@@ -11,6 +12,8 @@ public class MyFenetre : EditorWindow
     public float positionX;
 
     public float positionZ;
+
+    public GameObject theBot;
 
 
 
@@ -24,6 +27,10 @@ public class MyFenetre : EditorWindow
     {
         GUILayout.Label("Génère un point à fuir pour l'ia.", EditorStyles.boldLabel);
 
+        EditorGUILayout.Space();
+
+        theBot = EditorGUILayout.ObjectField("Le bot de la scene ", theBot, typeof(GameObject), true) as GameObject;
+        
         EditorGUILayout.Space();
 
         objectPosition = EditorGUILayout.Vector3Field("Run Away Point Position", objectPosition);
@@ -43,6 +50,13 @@ public class MyFenetre : EditorWindow
             {
                 newRunAwayPoint.transform.parent = Selection.gameObjects[0].transform;
             }
+
+            if (theBot != null)
+            {
+                theBot.GetComponent<BotBRAIN>().thingsToRunAway.Add(newRunAwayPoint);
+            }
+
+            EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene());
         }
     }
 }
