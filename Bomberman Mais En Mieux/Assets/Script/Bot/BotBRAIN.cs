@@ -42,6 +42,9 @@ public class BotBRAIN : MonoBehaviour
     [Foldout("Debug")]
     [SerializeField] GameObject bombToCatch;
 
+    [Foldout("Debug")]
+    [SerializeField] bool suicideMod;
+
 
 
     // Start is called before the first frame update
@@ -54,8 +57,7 @@ public class BotBRAIN : MonoBehaviour
 
     private void Update()
     {
-        
-
+        suicideMod = SuicidalMod();
     }
     public void UseBigBrainIA()
     {
@@ -176,5 +178,10 @@ public class BotBRAIN : MonoBehaviour
     public void BombSpawn(GameObject bomb)
     {
         AllBombesList.Add(bomb);
+    }
+
+    public bool SuicidalMod()
+    {
+        return (AllBombesList.Count == 0 && GetBombNumber() < player.GetComponent<PlayerPickDrop>().GetBombNumber());
     }
 }

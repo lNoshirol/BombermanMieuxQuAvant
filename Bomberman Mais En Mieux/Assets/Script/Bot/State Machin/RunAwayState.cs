@@ -27,7 +27,7 @@ public class RunAwayState : IBotState
             _brain.FleeDanger();
 
 
-            if (_stateMachine.IsInDanger() && _brain.GetBombNumber() <= _playerPickDrop.GetBombNumber())
+            if (_stateMachine.IsInDanger() && _brain.GetBombNumber() <= _playerPickDrop.GetBombNumber() && !_brain.SuicidalMod())
             {
                 _brain.FleeDanger();
             }
@@ -35,8 +35,8 @@ public class RunAwayState : IBotState
             {
                 _stateMachine.ChangeState(_stateMachine.searchBombState);
             }
-            else if ((_brain.GetBombNumber() > 0 && _brain.GetBombNumber() >= _playerPickDrop.GetBombNumber() && !_stateMachine.IsInDanger()) ||
-                    (_brain.GetBombNumber() > 0 && _brain.GetBombNumber() >= _playerPickDrop.GetBombNumber() && !_stateMachine.IsInDanger() && _brain.AllBombesList.Count == 0))
+            else if (((_brain.GetBombNumber() > 0 && _brain.GetBombNumber() >= _playerPickDrop.GetBombNumber() && !_stateMachine.IsInDanger()) ||
+                    (_brain.GetBombNumber() > 0 && _brain.GetBombNumber() >= _playerPickDrop.GetBombNumber() && !_stateMachine.IsInDanger() && _brain.AllBombesList.Count == 0)) || _brain.SuicidalMod())
             {
                 _stateMachine.ChangeState(_stateMachine.attackState);
             }

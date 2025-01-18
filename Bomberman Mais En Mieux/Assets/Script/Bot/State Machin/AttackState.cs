@@ -25,6 +25,7 @@ public class AttackState : IBotState
         {
             _brain.AttackPlayer();
 
+            if (_brain.SuicidalMod()) return;
 
             if (_stateMachine.IsInDanger() && _brain.GetBombNumber() <= _playerPickDrop.GetBombNumber())
             {

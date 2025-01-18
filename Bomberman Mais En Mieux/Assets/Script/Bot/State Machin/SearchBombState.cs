@@ -26,7 +26,7 @@ public class SearchBombState : IBotState
             _brain.BOTFindNearestBombe();
 
 
-            if (_stateMachine.IsInDanger() && _brain.GetBombNumber() <= _playerPickDrop.GetBombNumber())
+            if (_stateMachine.IsInDanger() && _brain.GetBombNumber() <= _playerPickDrop.GetBombNumber() && !_brain.SuicidalMod())
             {
                 _stateMachine.ChangeState(_stateMachine.runAwayState);
             }
@@ -34,8 +34,8 @@ public class SearchBombState : IBotState
             {
                 _brain.BOTFindNearestBombe();
             }
-            else if ((_brain.GetBombNumber() > 0 && _brain.GetBombNumber() >= _playerPickDrop.GetBombNumber() && !_stateMachine.IsInDanger()) || 
-                    (_brain.GetBombNumber() > 0 && _brain.GetBombNumber() >= _playerPickDrop.GetBombNumber() && !_stateMachine.IsInDanger() && _brain.AllBombesList.Count == 0))
+            else if (((_brain.GetBombNumber() > 0 && _brain.GetBombNumber() >= _playerPickDrop.GetBombNumber() && !_stateMachine.IsInDanger()) || 
+                    (_brain.GetBombNumber() > 0 && _brain.GetBombNumber() >= _playerPickDrop.GetBombNumber() && !_stateMachine.IsInDanger() && _brain.AllBombesList.Count == 0)) || _brain.SuicidalMod())
             {
                 _stateMachine.ChangeState(_stateMachine.attackState);
             }
