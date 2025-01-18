@@ -18,18 +18,25 @@ public class RunAwayState : IBotState
 
     public void StateUpdate()
     {
+        Debug.LogWarning($"RunAway {_stateMachine.IsInDanger() && _brain.GetBombNumber() <= _playerPickDrop.GetBombNumber()}");
+        Debug.LogWarning($"SearchBomb {(_brain.GetBombNumber() == 0 || _brain.GetBombNumber() < _playerPickDrop.GetBombNumber()) && !_stateMachine.IsInDanger() && _brain.AllBombesList.Count > 0}");
+        Debug.LogWarning($"Attack {(_brain.GetBombNumber() > 0 && _brain.GetBombNumber() >= _playerPickDrop.GetBombNumber() && !_stateMachine.IsInDanger()) || (_brain.GetBombNumber() > 0 && _brain.GetBombNumber() >= _playerPickDrop.GetBombNumber() && !_stateMachine.IsInDanger() && _brain.AllBombesList.Count == 0)}");
+
         if (this == _stateMachine.currentState && _brain.player != null)
         {
-            if (_stateMachine.IsInDanger())
+            _brain.FleeDanger();
+
+
+            if (_stateMachine.IsInDanger() && _brain.GetBombNumber() <= _playerPickDrop.GetBombNumber())
             {
                 _brain.FleeDanger();
             }
-            else if (!_stateMachine.IsInDanger() && _brain.GetBombNumber() < _playerPickDrop.GetBombNumber())
+            else if ((_brain.GetBombNumber() == 0 || _brain.GetBombNumber() < _playerPickDrop.GetBombNumber()) && !_stateMachine.IsInDanger() && _brain.AllBombesList.Count > 0)
             {
                 _stateMachine.ChangeState(_stateMachine.searchBombState);
             }
-
-            if (_brain.GetBombNumber() >= _playerPickDrop.GetBombNumber() && _brain.ClosestMenace() == _brain.player)
+            else if ((_brain.GetBombNumber() > 0 && _brain.GetBombNumber() >= _playerPickDrop.GetBombNumber() && !_stateMachine.IsInDanger()) ||
+                    (_brain.GetBombNumber() > 0 && _brain.GetBombNumber() >= _playerPickDrop.GetBombNumber() && !_stateMachine.IsInDanger() && _brain.AllBombesList.Count == 0))
             {
                 _stateMachine.ChangeState(_stateMachine.attackState);
             }

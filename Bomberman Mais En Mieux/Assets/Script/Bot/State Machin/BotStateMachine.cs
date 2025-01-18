@@ -14,6 +14,7 @@ public class BotStateMachine : MonoBehaviour
     public DeathState deathState = new();
 
     public BotBRAIN botBrain;
+    public bool isInDanger;
 
     private void Awake()
     {
@@ -42,6 +43,7 @@ public class BotStateMachine : MonoBehaviour
     private void Update()
     {
         currentState.StateUpdate();
+        isInDanger = IsInDanger();
         Debug.LogError(currentState.ToString());
     }
 
@@ -60,7 +62,7 @@ public class BotStateMachine : MonoBehaviour
 
     public bool IsInDanger()
     {
-        return DistanceFromClosestDanger() < botBrain.dangerZone;
+        return (DistanceFromClosestDanger() < botBrain.dangerZone);
     }
 }
 

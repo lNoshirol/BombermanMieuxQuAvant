@@ -12,13 +12,12 @@ public class BotPickup : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI bombeUI;
 
-    public event Action<GameObject> OndropBomb;
-
+    public event Action<GameObject> OnBotDropBomb;
+    public event Action<GameObject> OnBotPickBomb;
 
     // Start is called before the first frame update
     void Start()
     {
-        OndropBomb += GetComponent<BotBRAIN>().ABombHasBeenPlanted;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -29,9 +28,12 @@ public class BotPickup : MonoBehaviour
             bombe.GetComponent<Bombe>().canBeGrab = false;
             bombe.transform.position = bombeStock.position;
             bombe.transform.SetParent(bombeStock);
-            bombe.GetComponent<Collider>().isTrigger = false;
+            bombe.GetComponent<SphereCollider>().enabled = false;
             Debug.Log("Attraper");
-            botFindBombe.UseBigBrainIA();
+
+            OnBotPickBomb?.Invoke(bombe);
+
+            //botFindBombe.UseBigBrainIA();
             updateBombeUI();
         }
         else if (other.gameObject.tag == "Bombe" && bombeStock.childCount >= 3)
@@ -60,7 +62,7 @@ public class BotPickup : MonoBehaviour
             bombeToDrop.GetComponent<SphereCollider>().enabled = false;
             bombeToDrop.GetComponent<Bombe>().StartExplosion();
             updateBombeUI();
-            OndropBomb?.Invoke(bombeToDrop.gameObject);
+            OnBotDropBomb?.Invoke(bombeToDrop.gameObject);
         }
     }
 

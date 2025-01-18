@@ -14,7 +14,8 @@ public class PlayerPickDrop : MonoBehaviour
     [SerializeField] TextMeshProUGUI bombeUI;
     [SerializeField] BotBRAIN botBRAIN;
 
-    public event Action<GameObject> OndropBomb;
+    public event Action<GameObject> OnDropBomb;
+    public event Action<GameObject> OnPickBomb;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -23,11 +24,16 @@ public class PlayerPickDrop : MonoBehaviour
             other.transform.position = bombeStock.position;
             other.gameObject.transform.SetParent(bombeStock);
             bombe = other.gameObject;
-            bombe.GetComponent<Bombe>().canBeGrab = false; ;
+            bombe.GetComponent<Bombe>().canBeGrab = false;
+            bombe.GetComponent<SphereCollider>().enabled = false;
+
             Debug.Log("Attraper");
+
+            OnPickBomb?.Invoke(bombe);
+
             updateBombeUI();
-            if(!botBRAIN == false)
-            botBRAIN.UseBigBrainIA();
+            /*if(!botBRAIN == false)
+            botBRAIN.UseBigBrainIA();*/
         }
         else if(other.gameObject.tag == "Bombe" && bombeStock.childCount >= 3)
         {
@@ -64,10 +70,9 @@ public class PlayerPickDrop : MonoBehaviour
                 Transform bombeToDrop = bombeStock.GetChild(0);
                 Debug.Log(bombeToDrop);
                 bombeToDrop.parent = null;
-                bombeToDrop.GetComponent<SphereCollider>().enabled = false;
                 bombeToDrop.GetComponent<Bombe>().StartExplosion();
                 updateBombeUI();
-                OndropBomb?.Invoke(bombeToDrop.gameObject);
+                OnDropBomb?.Invoke(bombeToDrop.gameObject);
             }
         }
     }

@@ -17,19 +17,27 @@ public class SearchBombState : IBotState
 
     public void StateUpdate()
     {
+        Debug.LogWarning($"RunAway {_stateMachine.IsInDanger() && _brain.GetBombNumber() <= _playerPickDrop.GetBombNumber()}");
+        Debug.LogWarning($"SearchBomb {(_brain.GetBombNumber() == 0 || _brain.GetBombNumber() < _playerPickDrop.GetBombNumber()) && !_stateMachine.IsInDanger() && _brain.AllBombesList.Count > 0}");
+        Debug.LogWarning($"Attack {(_brain.GetBombNumber() > 0 && _brain.GetBombNumber() >= _playerPickDrop.GetBombNumber() && !_stateMachine.IsInDanger()) || (_brain.GetBombNumber() > 0 && _brain.GetBombNumber() >= _playerPickDrop.GetBombNumber() && !_stateMachine.IsInDanger() && _brain.AllBombesList.Count == 0)}");
+
         if (this == _stateMachine.currentState && _brain.player != null)
         {
-            if (_brain.GetBombNumber() == 0 || (_brain.GetBombNumber() < _playerPickDrop.GetBombNumber()))
+            _brain.BOTFindNearestBombe();
+
+
+            if (_stateMachine.IsInDanger() && _brain.GetBombNumber() <= _playerPickDrop.GetBombNumber())
+            {
+                _stateMachine.ChangeState(_stateMachine.runAwayState);
+            }
+            else if ((_brain.GetBombNumber() == 0 || _brain.GetBombNumber() < _playerPickDrop.GetBombNumber()) && !_stateMachine.IsInDanger() && _brain.AllBombesList.Count > 0)
             {
                 _brain.BOTFindNearestBombe();
             }
-            else if (_brain.GetBombNumber() > 0 && _brain.GetBombNumber() >= _playerPickDrop.GetBombNumber())
+            else if ((_brain.GetBombNumber() > 0 && _brain.GetBombNumber() >= _playerPickDrop.GetBombNumber() && !_stateMachine.IsInDanger()) || 
+                    (_brain.GetBombNumber() > 0 && _brain.GetBombNumber() >= _playerPickDrop.GetBombNumber() && !_stateMachine.IsInDanger() && _brain.AllBombesList.Count == 0))
             {
                 _stateMachine.ChangeState(_stateMachine.attackState);
-            }
-            else if (_stateMachine.IsInDanger())
-            {
-                _stateMachine.ChangeState(_stateMachine.runAwayState);
             }
         }
     }

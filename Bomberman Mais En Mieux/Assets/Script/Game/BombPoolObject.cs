@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ public class BombPoolObject : MonoBehaviour
     [SerializeField] List<GameObject> bombInPool;
     public List<GameObject> bombInUse;
 
+    public event Action<GameObject> onBombSpawn;
 
     private void Awake()
     {
@@ -34,7 +36,7 @@ public class BombPoolObject : MonoBehaviour
         {
             GameObject newBomb = Instantiate(bombPrefab);
             newBomb.GetComponent<Bombe>().OnKaboom += Oskour;
-            newBomb.name = "bombe";
+            newBomb.name = $"bombe {i}";
             ResetBomb(newBomb);
         }
 
@@ -56,6 +58,7 @@ public class BombPoolObject : MonoBehaviour
         }
         theBomb.transform.position = spawnPoint.position;
         theBomb.transform.parent = spawnPoint;
+        onBombSpawn?.Invoke(theBomb);
         theBomb.SetActive(true);
     }
 

@@ -6,9 +6,8 @@ using UnityEngine.AI;
 
 public class BotBRAIN : MonoBehaviour
 {
-    [Header("Public")]
     [Foldout("List")]
-    public List<GameObject> AllBombesList = new();
+    public List<GameObject> AllBombesList;
     [Foldout("List")]
     public List<GameObject> thingsToRunAway = new();
 
@@ -21,10 +20,10 @@ public class BotBRAIN : MonoBehaviour
     public NavMeshAgent navigation;
 
     [Foldout("Int")]
+    [MinValue(0), MaxValue(10)]
     public float dangerZone;
 
 
-    [Header("Private")]
     [Foldout("Transform")]
     [SerializeField] Transform bombeStock;
 
@@ -34,13 +33,23 @@ public class BotBRAIN : MonoBehaviour
     [Foldout("Debug")]
     [SerializeField] float nearestDistance;
 
+    [Foldout("Debug")]
+    [SerializeField] Vector3 direction;
+
+    [Foldout("Debug")]
+    [SerializeField] Vector3 FleePosition;
+
+    [Foldout("Debug")]
+    [SerializeField] GameObject bombToCatch;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
-        foreach(GameObject bombe in GameObject.FindGameObjectsWithTag("Bombe"))
-        {
-            AllBombesList.Add(bombe);
-        }
+        BombPoolObject.instance.onBombSpawn += BombSpawn;
+        GetComponent<BotPickup>().OnBotDropBomb += ABombHasBeenPlanted;
+        GetComponent<BotPickup>().OnBotPickBomb += BombHasBeenTake;
     }
 
     private void Update()
@@ -59,29 +68,36 @@ public class BotBRAIN : MonoBehaviour
 
     public void BOTFindNearestBombe()
     {
-        Debug.Log("Je cherche");
-        nearestDistance = Vector2.Distance(this.transform.position, BombPoolObject.instance.bombInUse[0].transform.position);
-
-        for (int i = 0; i < BombPoolObject.instance.bombInUse.Count; i++) 
+        if (AllBombesList.Count > 0)
         {
-            distance = Vector2.Distance(this.transform.position, BombPoolObject.instance.bombInUse[i].transform.position);
+            nearestDistance = Vector2.Distance(this.transform.position, AllBombesList[0].transform.position);
 
-            if (distance <= nearestDistance /*&& BombPoolObject.instance.bombInUse[i].GetComponent<Bombe>().canBeGrab == true*/) 
+            for (int i = 0; i < AllBombesList.Count; i++)
             {
-                NearestBombe = BombPoolObject.instance.bombInUse[i];
-                nearestDistance = distance;
-                Debug.Log("BombeFind");
+                //if (i > AllBombesList.Count - 1) i = 0;
+
+                distance = Vector2.Distance(this.transform.position, AllBombesList[i].transform.position);
+
+                if (distance <= nearestDistance && AllBombesList.Contains(AllBombesList[i]))
+                {
+                    NearestBombe = AllBombesList[i];
+                    bombToCatch = NearestBombe;
+                    nearestDistance = distance;
+                }
             }
+            navigation.destination = NearestBombe.transform.position;
         }
-        navigation.destination = NearestBombe.transform.position;
-        //RemoveBombFromList();
+        else
+        {
+            Debug.LogWarning("Poto, y a pas de bombe");
+        }
+
 
 
     }
 
     public void FindPlayer()
     {
-        Debug.Log("J'attaque le joueur");
         navigation.destination = player.transform.position;
     }
 
@@ -116,19 +132,18 @@ public class BotBRAIN : MonoBehaviour
 
     public void FleeDanger()
     {
-        Vector3 direction = (transform.position - ClosestMenace().transform.position).normalized;
+        direction = (transform.position - ClosestMenace().transform.position).normalized;
 
-        Vector3 fleePosition = transform.position + direction * 2;
+        FleePosition = transform.position + direction * 2;
 
-        NavMeshHit hit;
+        /*NavMeshHit hit;
 
         if (NavMesh.SamplePosition(fleePosition, out hit, 2, NavMesh.AllAreas))
         {
             fleePosition = hit.position;
-        }
+        }*/
 
-        navigation.SetDestination(fleePosition);
-        Debug.Log($"JE COURS VERS {fleePosition}");
+        navigation.SetDestination(FleePosition);
     }
 
     public void AttackPlayer()
@@ -138,6 +153,12 @@ public class BotBRAIN : MonoBehaviour
         {
             GetComponent<BotPickup>().BotDropBomb();
         }
+    }
+
+    public void BombHasBeenTake(GameObject bomb)
+    {
+        AllBombesList.Remove(bomb);
+        Debug.Log("BOMBE PRISE");
     }
 
     public void ABombHasBeenPlanted(GameObject bomb)
@@ -152,5 +173,8 @@ public class BotBRAIN : MonoBehaviour
         bomb.GetComponent<Bombe>().OnKaboom -= ABombHasExplod;
     }
 
-    
+    public void BombSpawn(GameObject bomb)
+    {
+        AllBombesList.Add(bomb);
+    }
 }

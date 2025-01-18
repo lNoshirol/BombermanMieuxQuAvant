@@ -17,19 +17,27 @@ public class AttackState : IBotState
 
     public void StateUpdate()
     {
+        Debug.LogWarning($"RunAway {_stateMachine.IsInDanger() && _brain.GetBombNumber() <= _playerPickDrop.GetBombNumber()}");
+        Debug.LogWarning($"SearchBomb {(_brain.GetBombNumber() == 0 || _brain.GetBombNumber() < _playerPickDrop.GetBombNumber()) && !_stateMachine.IsInDanger() && _brain.AllBombesList.Count > 0}");
+        Debug.LogWarning($"Attack {(_brain.GetBombNumber() > 0 && _brain.GetBombNumber() >= _playerPickDrop.GetBombNumber() && !_stateMachine.IsInDanger()) || (_brain.GetBombNumber() > 0 && _brain.GetBombNumber() >= _playerPickDrop.GetBombNumber() && !_stateMachine.IsInDanger() && _brain.AllBombesList.Count == 0)}");
+
         if (this == _stateMachine.currentState && _brain.player != null)
         {
-            if (_brain.GetBombNumber() >= _playerPickDrop.GetBombNumber() && _brain.ClosestMenace().name != "bombe")
-            {
-                _brain.AttackPlayer();
-            }
-            else if (_brain.GetBombNumber() < _playerPickDrop.GetBombNumber() && _stateMachine.IsInDanger())
+            _brain.AttackPlayer();
+
+
+            if (_stateMachine.IsInDanger() && _brain.GetBombNumber() <= _playerPickDrop.GetBombNumber())
             {
                 _stateMachine.ChangeState(_stateMachine.runAwayState);
             }
-            else if (!_stateMachine.IsInDanger() && _brain.GetBombNumber() < _playerPickDrop.GetBombNumber())
+            else if ((_brain.GetBombNumber() == 0 || _brain.GetBombNumber() < _playerPickDrop.GetBombNumber()) && !_stateMachine.IsInDanger() && _brain.AllBombesList.Count > 0)
             {
                 _stateMachine.ChangeState(_stateMachine.searchBombState);
+            }
+            else if ((_brain.GetBombNumber() > 0 && _brain.GetBombNumber() >= _playerPickDrop.GetBombNumber() && !_stateMachine.IsInDanger()) || 
+                    (_brain.GetBombNumber() > 0 && _brain.GetBombNumber() >= _playerPickDrop.GetBombNumber() && !_stateMachine.IsInDanger() && _brain.AllBombesList.Count == 0))
+            {
+                _brain.AttackPlayer();
             }
         }
     }
