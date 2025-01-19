@@ -33,7 +33,7 @@ public class PlayerHealth : MonoBehaviour
         playerRenderer = gameObject.GetComponent<Renderer>();
         baseColor = playerRenderer.material.color;
     }
-    private void takeDamage()
+    public void takeDamage()
     {
         pv=pv-damageMultiplier;
 
