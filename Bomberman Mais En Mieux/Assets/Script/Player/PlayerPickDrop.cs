@@ -7,12 +7,19 @@ using System;
 
 public class PlayerPickDrop : MonoBehaviour
 {
+    [Header("Bombe")]
+    [Tooltip("Location of the bombe inventory")]
     [SerializeField] Transform bombeStock;
+
+    [Tooltip("number of bombe show in UI")]
+    [SerializeField] TextMeshProUGUI bombeUI;
+
+
+    [Header("IA")]
+    [SerializeField] BotBRAIN botBRAIN;
+
     private PlayerActions _playerInput;
     private GameObject bombe;
-
-    [SerializeField] TextMeshProUGUI bombeUI;
-    [SerializeField] BotBRAIN botBRAIN;
 
     public event Action<GameObject> OnDropBomb;
     public event Action<GameObject> OnPickBomb;
@@ -37,7 +44,7 @@ public class PlayerPickDrop : MonoBehaviour
         }
         else if(other.gameObject.tag == "Bombe" && bombeStock.childCount >= 3)
         {
-            Debug.Log("Plus de place dans le sac mon coco");
+            Debug.Log("not enough space");
         }
     }
 

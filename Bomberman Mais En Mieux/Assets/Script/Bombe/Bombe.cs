@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEditor;
 public class Bombe : MonoBehaviour
 {
     [SerializeField] List<Transform> radius = new List<Transform>();
@@ -47,8 +47,6 @@ public class Bombe : MonoBehaviour
         {
             child.gameObject.SetActive(true);
             yield return new WaitForSeconds(0.10f);
-            //child.gameObject.SetActive(false);
-            //yield return new WaitForSeconds(0.25f);
         }
         yield return new WaitForSeconds(0.5f);
 
