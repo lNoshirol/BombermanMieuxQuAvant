@@ -28,7 +28,7 @@ public class BotPickup : MonoBehaviour
             bombe.GetComponent<Bombe>().canBeGrab = false;
             bombe.transform.position = bombeStock.position;
             bombe.transform.SetParent(bombeStock);
-            bombe.GetComponent<SphereCollider>().enabled = false;
+            bombe.GetComponent<CapsuleCollider>().enabled = false;
             Debug.Log("Attraper");
 
             OnBotPickBomb?.Invoke(bombe);
@@ -59,7 +59,7 @@ public class BotPickup : MonoBehaviour
             Transform bombeToDrop = bombeStock.GetChild(0);
             Debug.Log(bombeToDrop);
             bombeToDrop.parent = null;
-            bombeToDrop.GetComponent<SphereCollider>().enabled = false;
+            bombeToDrop.GetComponent<CapsuleCollider>().enabled = false;
             bombeToDrop.GetComponent<Bombe>().StartExplosion();
             updateBombeUI();
             OnBotDropBomb?.Invoke(bombeToDrop.gameObject);

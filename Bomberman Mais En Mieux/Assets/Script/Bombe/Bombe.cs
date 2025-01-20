@@ -11,6 +11,7 @@ public class Bombe : MonoBehaviour
     private Color _baseColor;
 
     public event Action<GameObject> OnKaboom;
+    [SerializeField] GameObject bombeRadius;
 
     // Start is called before the first frame update
     void Awake()
@@ -42,13 +43,15 @@ public class Bombe : MonoBehaviour
 
     private IEnumerator Explosion()
     {
+        yield return new WaitForSeconds(0.2f);
         _renderer.enabled = false;
-        foreach (Transform child in transform)
+        foreach (Transform child in bombeRadius.transform)
         {
             child.gameObject.SetActive(true);
             yield return new WaitForSeconds(0.10f);
         }
         yield return new WaitForSeconds(0.5f);
+        
 
         OnKaboom?.Invoke(gameObject);
 
@@ -68,10 +71,10 @@ public class Bombe : MonoBehaviour
         canBeGrab = true;
         _renderer.enabled = true;
         _renderer.material.color = _baseColor;
-        foreach (Transform child in transform)
+        foreach (Transform child in bombeRadius.transform)
         {
             child.gameObject.SetActive(false);
         }
-        GetComponent<SphereCollider>().enabled = true;
+        GetComponent<CapsuleCollider>().enabled = true;
     }
 }

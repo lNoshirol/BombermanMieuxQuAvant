@@ -32,7 +32,7 @@ public class PlayerPickDrop : MonoBehaviour
             other.gameObject.transform.SetParent(bombeStock);
             bombe = other.gameObject;
             bombe.GetComponent<Bombe>().canBeGrab = false;
-            bombe.GetComponent<SphereCollider>().enabled = false;
+            bombe.GetComponent<CapsuleCollider>().enabled = false;
 
             Debug.Log("Attraper");
 
