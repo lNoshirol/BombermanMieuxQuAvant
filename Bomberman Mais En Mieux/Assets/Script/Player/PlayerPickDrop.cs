@@ -80,7 +80,7 @@ public class PlayerPickDrop : MonoBehaviour
                 bombeToDrop.GetComponent<Bombe>().StartExplosion();
                 updateBombeUI();
                 OnDropBomb?.Invoke(bombeToDrop.gameObject);
-                //bombeToDrop.position = new Vector3(Mathf.RoundToInt(transform.position.x) + 0.5f, transform.position.y, Mathf.RoundToInt(transform.position.z) + 0.5f);
+                bombeToDrop.position = new Vector3(Mathf.RoundToInt(transform.position.x) + 0.5f, transform.position.y, Mathf.RoundToInt(transform.position.z) + 0.5f);
             }
         }
     }
