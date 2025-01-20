@@ -11,8 +11,9 @@ public class TestLucas
     public void TestLucasSimplePasses()
     {
         // -- Arrange --
+        GameObject go = new();
 
-        PlayerHealth playerHealth = new();
+        PlayerHealth playerHealth = go.AddComponent<PlayerHealth>();
 
         int oldHealth = playerHealth.pv;
         int damageYouWillTake = 1;

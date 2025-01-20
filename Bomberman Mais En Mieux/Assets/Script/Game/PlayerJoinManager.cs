@@ -11,6 +11,9 @@ public class PlayerJoinManager : MonoBehaviour
     public List<Transform> playerSpawnPoint;
     public List<Material> playersMat;
 
+    public List<GameObject> playerAliveList;
+    public List<GameObject> playerDeadList;
+
     public GameObject theBot;
 
     private void Awake()
@@ -23,6 +26,19 @@ public class PlayerJoinManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void OnPlayerJoin(GameObject go)
+    {
+        playerAliveList.Add(go);
+    }
+
+    public void SwitchAliveToDead(GameObject go)
+    {
+        playerAliveList.Remove(go);
+        playerDeadList.Add(go);
+        go.GetComponent<PlayerMove>().enabled = false;
+        go.GetComponent<PlayerPickDrop>();
     }
 
     public void OnJoined()
