@@ -91,7 +91,6 @@ public class BotBRAIN : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Poto, y a pas de bombe");
         }
 
 
@@ -160,7 +159,6 @@ public class BotBRAIN : MonoBehaviour
     public void BombHasBeenTake(GameObject bomb)
     {
         AllBombesList.Remove(bomb);
-        Debug.Log("BOMBE PRISE");
     }
 
     public void ABombHasBeenPlanted(GameObject bomb)

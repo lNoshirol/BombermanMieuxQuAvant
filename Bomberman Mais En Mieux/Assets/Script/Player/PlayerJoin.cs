@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class PlayerJoin : MonoBehaviour
 {
-    PlayerJoinManager playerJoinManager;
+    MuultiplayerManager playerJoinManager;
 
     private void Awake()
     {
-        playerJoinManager = PlayerJoinManager.instance;
+        playerJoinManager = MuultiplayerManager.instance;
 
         if (playerJoinManager.theBot != null)
         {
@@ -16,14 +16,17 @@ public class PlayerJoin : MonoBehaviour
 
             GetComponent<PlayerPickDrop>().OnDropBomb += playerJoinManager.theBot.GetComponent<BotBRAIN>().ABombHasBeenPlanted;
             GetComponent<PlayerPickDrop>().OnPickBomb += playerJoinManager.theBot.GetComponent<BotBRAIN>().BombHasBeenTake;
+
+
+            BotStateMachine botStateMachine = playerJoinManager.theBot.GetComponent<BotStateMachine>();
+            botStateMachine.ChangeState(botStateMachine.searchBombState);
         }
 
         transform.position = playerJoinManager.playerSpawnPoint[playerJoinManager.playerThatJoined-1].position; 
         GetComponent<MeshRenderer>().material = playerJoinManager.playersMat[playerJoinManager.playerThatJoined - 1];
-
+        gameObject.name = $"Player {playerJoinManager.playerThatJoined}";
         
 
-        BotStateMachine botStateMachine = playerJoinManager.theBot.GetComponent<BotStateMachine>();
-        botStateMachine.ChangeState(botStateMachine.searchBombState);
+        playerJoinManager.OnPlayerJoin(gameObject);
     }
 }

@@ -17,7 +17,7 @@ public class TestEmrys
 
         int healthCaughtInEvent = 0;
 
-        playerhealth.OnDamageTake += (health) => healthCaughtInEvent = health;
+        playerhealth.OnDamageTakePv += (health) => healthCaughtInEvent = health;
         // -- Act -- 
 
         playerhealth.takeDamage();

@@ -75,7 +75,6 @@ public class BombPoolObject : MonoBehaviour
 
     public void Oskour(GameObject theBomb)
     {
-        Debug.Log("ET LA C BON");
         StartCoroutine(BombExplode(theBomb));
     }
 

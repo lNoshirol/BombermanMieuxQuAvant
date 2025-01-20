@@ -8,13 +8,14 @@ public class PlayerHealth : MonoBehaviour
 {
     public int pv;
     [SerializeField] TextMeshProUGUI healthUI;
-    [SerializeField] int damageMultiplier;
+    public int damageMultiplier;
     Collider playerCollider;
     Renderer playerRenderer;
     Color baseColor;
     bool invincible = false;
 
-    public event Action<int> OnDamageTake;
+    public event Action<int> OnDamageTakePv;
+    public event Action<GameObject, int> OnDamageTakeGameObject;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -37,7 +38,8 @@ public class PlayerHealth : MonoBehaviour
     {
         pv=pv-damageMultiplier;
 
-        OnDamageTake?.Invoke(pv);
+        OnDamageTakePv?.Invoke(pv);
+        OnDamageTakeGameObject?.Invoke(gameObject, pv);
 
         StartCoroutine(Invicibility());
     }
