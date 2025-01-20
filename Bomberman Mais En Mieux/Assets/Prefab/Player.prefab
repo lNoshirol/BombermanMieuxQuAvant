@@ -139,7 +139,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &1625633630785336292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,6 +235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bombeStock: {fileID: 3463297890183062269}
   bombeUI: {fileID: 5483275141015588899}
+  playerCanvas: {fileID: 1630766226948195325}
   botBRAIN: {fileID: 0}
 --- !u!114 &2697661232908750162
 MonoBehaviour:

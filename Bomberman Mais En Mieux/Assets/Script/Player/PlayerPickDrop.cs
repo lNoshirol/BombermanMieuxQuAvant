@@ -14,6 +14,8 @@ public class PlayerPickDrop : MonoBehaviour
     [Tooltip("number of bombe show in UI")]
     [SerializeField] TextMeshProUGUI bombeUI;
 
+    public GameObject playerCanvas;
+
 
     [Header("IA")]
     [SerializeField] BotBRAIN botBRAIN;

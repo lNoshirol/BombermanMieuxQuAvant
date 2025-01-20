@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class PlayerJoin : MonoBehaviour
 {
-    PlayerJoinManager playerJoinManager;
+    MuultiplayerManager playerJoinManager;
 
     private void Awake()
     {
-        playerJoinManager = PlayerJoinManager.instance;
+        playerJoinManager = MuultiplayerManager.instance;
 
         if (playerJoinManager.theBot != null)
         {
@@ -27,6 +27,6 @@ public class PlayerJoin : MonoBehaviour
         gameObject.name = $"Player {playerJoinManager.playerThatJoined}";
         
 
-        
+        playerJoinManager.OnPlayerJoin(gameObject);
     }
 }

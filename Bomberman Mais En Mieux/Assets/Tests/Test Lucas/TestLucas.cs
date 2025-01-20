@@ -21,7 +21,7 @@ public class TestLucas
         playerHealth.damageMultiplier = damageYouWillTake;
 
         int healthCaughtInEvent = 0;
-        playerHealth.OnDamageTake += (score) => healthCaughtInEvent = score;
+        playerHealth.OnDamageTakePv += (score) => healthCaughtInEvent = score;
 
         // -- Act --
 

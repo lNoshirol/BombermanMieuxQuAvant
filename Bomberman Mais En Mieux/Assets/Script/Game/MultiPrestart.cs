@@ -5,17 +5,17 @@ using UnityEngine.InputSystem;
 
 public class MultiPrestart : MonoBehaviour
 {
-    private PlayerJoinManager joinManager;
+    private MuultiplayerManager joinManager;
 
     private void Start()
     {
         Time.timeScale = 0;
-        joinManager = GetComponent<PlayerJoinManager>();
+        joinManager = GetComponent<MuultiplayerManager>();
     }
 
     public void OnStartGame()
     {
-        joinManager.gameObject.SetActive(false);
+        joinManager.GetComponent<PlayerInputManager>().enabled = false;
         Time.timeScale = 1f;
     }
 }

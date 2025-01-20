@@ -19,7 +19,7 @@ public class BotStateMachine : MonoBehaviour
     private void Awake()
     {
         botBrain = GetComponent<BotBRAIN>();
-        GetComponent<PlayerHealth>().OnDamageTake += DamageTaken;
+        GetComponent<PlayerHealth>().OnDamageTakePv += DamageTaken;
     }
 
     private void Start()
