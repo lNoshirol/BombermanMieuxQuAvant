@@ -18,6 +18,8 @@ public class BombPoolObject : MonoBehaviour
 
     public event Action<GameObject> onBombSpawn;
 
+    [SerializeField] Animator bombeAnime;
+
     private void Awake()
     {
         if (instance == null)
@@ -60,6 +62,7 @@ public class BombPoolObject : MonoBehaviour
         theBomb.transform.parent = spawnPoint;
         onBombSpawn?.Invoke(theBomb);
         theBomb.SetActive(true);
+        
     }
 
     public void ResetBomb(GameObject theBomb)

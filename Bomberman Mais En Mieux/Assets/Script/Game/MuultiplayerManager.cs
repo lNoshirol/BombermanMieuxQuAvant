@@ -59,10 +59,13 @@ public class MuultiplayerManager : MonoBehaviour
 
     public void Win(GameObject goWinner)
     {
-        Time.timeScale = 0;
-        winPanel.SetActive(true);
-        winText.text += " " + goWinner.name;
-        winPanel.GetComponent<Image>().color = goWinner.GetComponent<MeshRenderer>().material.color;
+        if (winPanel != null) {
+            Time.timeScale = 0;
+            winPanel.SetActive(true);
+            winText.text += " " + goWinner.name;
+            winPanel.GetComponent<Image>().color = goWinner.GetComponent<MeshRenderer>().material.color;
+        }
+
     }
 
     public void SwitchAliveToDead(GameObject go)

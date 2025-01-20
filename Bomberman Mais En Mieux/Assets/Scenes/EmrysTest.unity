@@ -960,13 +960,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
-  m_LocalPosition: {x: 0, y: 18.18, z: -6.27}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 0, y: 40.3, z: -34.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3952,6 +3952,8 @@ MonoBehaviour:
   - {fileID: 545512012}
   bombInPool: []
   bombInUse: []
+  bombeAnime: {fileID: 4158859960145205950, guid: 947f466f50319e549bc23d1c4a0d55a3,
+    type: 3}
 --- !u!4 &1504944955
 Transform:
   m_ObjectHideFlags: 0
@@ -5573,7 +5575,11 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 3e4c6f5e4a806fb489e2f6a282d5a24e, type: 2}
   - {fileID: 2100000, guid: 295f5f847f8ced4488b0f8e4e2757f2e, type: 2}
   - {fileID: 2100000, guid: 791e8233b00e9344ab6ba8b2880378c2, type: 2}
+  playerAliveList: []
+  playerDeadList: []
   theBot: {fileID: 1751544003}
+  winPanel: {fileID: 0}
+  winText: {fileID: 0}
 --- !u!114 &2110338840
 MonoBehaviour:
   m_ObjectHideFlags: 0
