@@ -8,7 +8,7 @@ public class PlayerHealth : MonoBehaviour
 {
     public int pv;
     [SerializeField] TextMeshProUGUI healthUI;
-    [SerializeField] int damageMultiplier;
+    public int damageMultiplier;
     Collider playerCollider;
     Renderer playerRenderer;
     Color baseColor;
@@ -33,7 +33,7 @@ public class PlayerHealth : MonoBehaviour
         playerRenderer = gameObject.GetComponent<Renderer>();
         baseColor = playerRenderer.material.color;
     }
-    private void takeDamage()
+    public void takeDamage()
     {
         pv=pv-damageMultiplier;
 

@@ -12,15 +12,24 @@ public class TestLucas
     {
         // -- Arrange --
 
+        PlayerHealth playerHealth = new();
 
+        int oldHealth = playerHealth.pv;
+        int damageYouWillTake = 1;
+
+        playerHealth.damageMultiplier = damageYouWillTake;
+
+        int healthCaughtInEvent = 0;
+        playerHealth.OnDamageTake += (score) => healthCaughtInEvent = score;
 
         // -- Act --
 
-
+        playerHealth.takeDamage();
+        int newHealth = playerHealth.pv;
 
         // -- Assert --
 
-
+        Assert.That(newHealth, Is.EqualTo(oldHealth - damageYouWillTake));
     }
 
     // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
