@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 6710231672499059763}
   - component: {fileID: 2697661232908750162}
   - component: {fileID: 1139392085207567655}
+  - component: {fileID: 8402527735723455863}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -199,9 +200,21 @@ MonoBehaviour:
     m_ActionId: 5c1f1e6a-0e36-4ae1-abdb-d5328d596f25
     m_ActionName: Keyboard/Drop[/Mouse/leftButton]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: fc825e0e-4765-48c7-9680-fab451162361
-    m_ActionName: Keyboard/setPause
+      m_Calls:
+      - m_Target: {fileID: 8402527735723455863}
+        m_TargetAssemblyTypeName: PlayerSetPause, Game
+        m_MethodName: OnSetPauseTrigger
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 2b77c6e8-ae4e-456e-a33c-c88aac90a12a
+    m_ActionName: Keyboard/SetPause[/Keyboard/escape,/XInputControllerWindows/start]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Keyboard
@@ -262,6 +275,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df47d86f03d90234b85c674c42ee9df3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8402527735723455863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046032257268557040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b20f3d41a013a64cbf4e5968868ad58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1630766226948195325

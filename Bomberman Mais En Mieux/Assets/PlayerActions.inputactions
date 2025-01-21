@@ -24,9 +24,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "setPause",
+                    "name": "SetPause",
                     "type": "Button",
-                    "id": "fc825e0e-4765-48c7-9680-fab451162361",
+                    "id": "2b77c6e8-ae4e-456e-a33c-c88aac90a12a",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -124,12 +124,23 @@
                 },
                 {
                     "name": "",
-                    "id": "8cf6e09b-50fd-4374-a471-f0942986deb9",
+                    "id": "7ef6566a-8e95-4119-a3e4-f67af045bcdd",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SetPause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c86b0edb-c97a-45f9-98fe-63a4a233be6a",
                     "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "setPause",
+                    "action": "SetPause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -8,7 +8,7 @@ public class MuultiplayerManager : MonoBehaviour
 {
     public static MuultiplayerManager instance;
 
-    public int playerThatJoined;
+    public int playerThatJoined = 0;
 
     public List<Transform> playerSpawnPoint;
     public List<Material> playersMat;
@@ -33,6 +33,11 @@ public class MuultiplayerManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        playerThatJoined = playerAliveList.Count;
+    }
+
     public void OnPlayerJoin(GameObject go)
     {
         playerAliveList.Add(go);
@@ -51,7 +56,7 @@ public class MuultiplayerManager : MonoBehaviour
 
     public void CheckWinConditionHogRider()
     {
-        if (playerAliveList.Count == 1)
+        if (playerAliveList.Count == 1 && theBot == null)
         {
             Win(playerAliveList[0]);
         }
