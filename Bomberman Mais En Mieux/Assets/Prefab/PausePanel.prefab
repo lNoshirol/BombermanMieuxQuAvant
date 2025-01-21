@@ -163,6 +163,7 @@ GameObject:
   - component: {fileID: 559003631307876720}
   - component: {fileID: 5491820192941070456}
   - component: {fileID: 5912811517985455207}
+  - component: {fileID: 8755284199764134949}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -271,7 +272,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5491820192941070456}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8755284199764134949}
+        m_TargetAssemblyTypeName: ChangeScene, Game
+        m_MethodName: OnCLick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8755284199764134949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2141680968089489296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bf51be88356cd249ab84f543a355c89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName: Main Menu
 --- !u!1 &3240699157840608261
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,6 +408,7 @@ MonoBehaviour:
   textToChange:
   - {fileID: 1601853268674453643}
   - {fileID: 4628877118582115760}
+  - {fileID: 3751543931444968912}
 --- !u!114 &8786797162337867616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -528,7 +555,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5636207988716878265}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1794578831752417128}
+        m_TargetAssemblyTypeName: SetPauseManager, Game
+        m_MethodName: SetPauseTrigger
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8321135058735650864
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,6 +27,6 @@ public class PlayerJoin : MonoBehaviour
         gameObject.name = $"Player {playerJoinManager.playerThatJoined}";
         
 
-        playerJoinManager.OnPlayerJoin(gameObject);
+        MultiplayerWinManager.instance.OnPlayerJoin(gameObject);
     }
 }
