@@ -4436,7 +4436,7 @@ PrefabInstance:
     - target: {fileID: 6532930640452474898, guid: 73ef8ff798ae1004dba4159c8a78710e,
         type: 3}
       propertyPath: m_AngularSpeed
-      value: 0
+      value: 360
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -1,17 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
     private PlayerActions _playerInput;
-    [SerializeField] Vector3 _direction;
+    [SerializeField] private Vector3 _direction;
 
     public float _moveSpeed;
-    private Vector3 _moveInput;
-
-
 
     private void Awake()
     {
@@ -31,11 +26,17 @@ public class PlayerMove : MonoBehaviour
     public void OnMove(InputAction.CallbackContext callbackContext)
     {
         var _valueRead = callbackContext.ReadValue<Vector2>();
-        _direction = new Vector3(_valueRead.x, 0, _valueRead.y);
+        _direction = new Vector3(_valueRead.x, 0, _valueRead.y).normalized;
     }
 
-    public void Update()
+    private void Update()
     {
         transform.position += Time.deltaTime * _moveSpeed * _direction;
+
+        if (_direction != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(_direction);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 360 * Time.deltaTime);
+        }
     }
 }
