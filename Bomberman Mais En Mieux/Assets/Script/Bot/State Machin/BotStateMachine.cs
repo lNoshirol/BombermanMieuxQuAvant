@@ -44,7 +44,6 @@ public class BotStateMachine : MonoBehaviour
     {
         currentState.StateUpdate();
         isInDanger = IsInDanger();
-        Debug.LogError(currentState.ToString());
     }
 
     public void DamageTaken(int pv)

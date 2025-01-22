@@ -3,9 +3,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MultiplayerWinManager : MonoBehaviour
+public class WinManager : MonoBehaviour
 {
-    public static MultiplayerWinManager instance;
+    public static WinManager instance;
 
     public List<GameObject> playerAliveList;
     public List<GameObject> playerDeadList;
@@ -33,6 +33,8 @@ public class MultiplayerWinManager : MonoBehaviour
 
     public void CheckPlayerHealth(GameObject go, int pv)
     {
+        Debug.LogError(go.name);
+
         if (pv <= 0)
         {
             SwitchAliveToDead(go);
@@ -64,8 +66,12 @@ public class MultiplayerWinManager : MonoBehaviour
     {
         playerAliveList.Remove(go);
         playerDeadList.Add(go);
-        go.GetComponent<PlayerMove>().enabled = false;
-        go.GetComponent<PlayerPickDrop>().playerCanvas.SetActive(false);
-        go.GetComponent<PlayerPickDrop>().enabled = false;
+
+        if (go.CompareTag("Player"))
+        {
+            go.GetComponent<PlayerMove>().enabled = false;
+            go.GetComponent<PlayerPickDrop>().playerCanvas.SetActive(false);
+            go.GetComponent<PlayerPickDrop>().enabled = false;
+        }
     }
 }

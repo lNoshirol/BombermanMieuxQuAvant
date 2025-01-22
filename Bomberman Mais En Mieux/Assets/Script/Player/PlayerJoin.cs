@@ -20,6 +20,7 @@ public class PlayerJoin : MonoBehaviour
 
             BotStateMachine botStateMachine = playerJoinManager.theBot.GetComponent<BotStateMachine>();
             botStateMachine.ChangeState(botStateMachine.searchBombState);
+
         }
 
         transform.position = playerJoinManager.playerSpawnPoint[playerJoinManager.playerThatJoined-1].position; 
@@ -27,6 +28,6 @@ public class PlayerJoin : MonoBehaviour
         gameObject.name = $"Player {playerJoinManager.playerThatJoined}";
         
 
-        MultiplayerWinManager.instance.OnPlayerJoin(gameObject);
+        WinManager.instance.OnPlayerJoin(gameObject);
     }
 }

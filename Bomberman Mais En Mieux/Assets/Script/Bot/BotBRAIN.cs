@@ -53,6 +53,7 @@ public class BotBRAIN : MonoBehaviour
         BombPoolObject.instance.onBombSpawn += BombSpawn;
         GetComponent<BotPickup>().OnBotDropBomb += ABombHasBeenPlanted;
         GetComponent<BotPickup>().OnBotPickBomb += BombHasBeenTake;
+        WinManager.instance.OnPlayerJoin(gameObject);
     }
 
     private void Update()

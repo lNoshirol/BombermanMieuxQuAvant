@@ -20,7 +20,7 @@ public class DeathState : IBotState
     public void StateUpdate()
     {
 
-        Debug.Log($"{_stateMachine.gameObject.name}, est mort.");
+        //Debug.Log($"{_stateMachine.gameObject.name}, est mort.");
     }
 
     public void OnExit(BotStateMachine stateMachine)
