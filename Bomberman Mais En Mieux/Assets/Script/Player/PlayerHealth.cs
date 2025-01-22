@@ -23,7 +23,6 @@ public class PlayerHealth : MonoBehaviour
         {
             takeDamage();
             updateHealthUI();
-            Debug.Log($"Take damage, health={pv}");
 
         }
     }
@@ -53,7 +52,6 @@ public class PlayerHealth : MonoBehaviour
     {
         invincible = true;
         playerRenderer.material.color = Color.black;
-        Debug.Log("switchcolor");
         yield return new WaitForSeconds(0.25f);
         playerRenderer.material.color = baseColor;
         yield return new WaitForSeconds(0.25f);
