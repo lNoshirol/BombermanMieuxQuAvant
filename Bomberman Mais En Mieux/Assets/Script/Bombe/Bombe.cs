@@ -41,7 +41,6 @@ public class Bombe : MonoBehaviour
         //Debug.Log($"Explosion dans {i}...");
         yield return new WaitForSeconds(1f);
         //}
-        Debug.Log("Boom");
         StartCoroutine(Explosion());
     }
 

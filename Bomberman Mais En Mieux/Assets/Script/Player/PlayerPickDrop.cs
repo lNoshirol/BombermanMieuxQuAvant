@@ -37,17 +37,10 @@ public class PlayerPickDrop : MonoBehaviour
             bombe.GetComponent<BoxCollider>().enabled = false;
             
 
-            Debug.Log("Attraper");
 
             OnPickBomb?.Invoke(bombe);
 
             updateBombeUI();
-            /*if(!botBRAIN == false)
-            botBRAIN.UseBigBrainIA();*/
-        }
-        else if(other.gameObject.tag == "Bombe" && bombeStock.childCount >= 3)
-        {
-            Debug.Log("not enough space");
         }
     }
 
@@ -70,20 +63,13 @@ public class PlayerPickDrop : MonoBehaviour
     {
         if (callbackContext.started)
         {
-            if (bombeStock.childCount < 1)
+            if (bombeStock.childCount > 1)
             {
-                Debug.Log("Pas de bombe à poser");
-            }
-            else
-            {
-                Debug.Log("Je drop");
                 Transform bombeToDrop = bombeStock.GetChild(0);
-                Debug.Log(bombeToDrop);
                 bombeToDrop.parent = null;
                 bombeToDrop.GetComponent<Bombe>().StartExplosion();
                 updateBombeUI();
                 OnDropBomb?.Invoke(bombeToDrop.gameObject);
-
             }
         }
     }

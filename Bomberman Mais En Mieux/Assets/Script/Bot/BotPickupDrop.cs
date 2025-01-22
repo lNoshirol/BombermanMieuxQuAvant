@@ -15,11 +15,6 @@ public class BotPickup : MonoBehaviour
     public event Action<GameObject> OnBotDropBomb;
     public event Action<GameObject> OnBotPickBomb;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Bombe" && bombeStock.childCount < 3)
@@ -29,16 +24,10 @@ public class BotPickup : MonoBehaviour
             bombe.transform.position = bombeStock.position;
             bombe.transform.SetParent(bombeStock);
             bombe.GetComponent<BoxCollider>().enabled = false;
-            Debug.Log("Attraper");
 
             OnBotPickBomb?.Invoke(bombe);
 
-            //botFindBombe.UseBigBrainIA();
             updateBombeUI();
-        }
-        else if (other.gameObject.tag == "Bombe" && bombeStock.childCount >= 3)
-        {
-            Debug.Log("Plus de place dans le sac mon coco");
         }
     }
 
@@ -49,15 +38,9 @@ public class BotPickup : MonoBehaviour
 
     public void BotDropBomb()
     {
-        if (bombeStock.childCount < 1)
+        if (bombeStock.childCount > 1)
         {
-            Debug.Log("Pas de bombe à poser");
-        }
-        else
-        {
-            Debug.Log("Je drop");
             Transform bombeToDrop = bombeStock.GetChild(0);
-            Debug.Log(bombeToDrop);
             bombeToDrop.parent = null;
             bombeToDrop.GetComponent<BoxCollider>().enabled = false;
             bombeToDrop.GetComponent<Bombe>().StartExplosion();

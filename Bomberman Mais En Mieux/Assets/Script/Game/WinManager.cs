@@ -33,7 +33,6 @@ public class WinManager : MonoBehaviour
 
     public void CheckPlayerHealth(GameObject go, int pv)
     {
-        Debug.LogError(go.name);
 
         if (pv <= 0)
         {
