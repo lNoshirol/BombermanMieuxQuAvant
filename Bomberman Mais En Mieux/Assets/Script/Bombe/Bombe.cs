@@ -33,12 +33,13 @@ public class Bombe : MonoBehaviour
 
     private IEnumerator WaitAndExplosion()
     {
+        transform.rotation = Quaternion.identity;
         bombeAnime.Play("BombeExplode");
-        
+
         //for (int i = 1; i > 0; i--)
         //{
-            //Debug.Log($"Explosion dans {i}...");
-            yield return new WaitForSeconds(1f);
+        //Debug.Log($"Explosion dans {i}...");
+        yield return new WaitForSeconds(1f);
         //}
         Debug.Log("Boom");
         StartCoroutine(Explosion());
@@ -47,15 +48,10 @@ public class Bombe : MonoBehaviour
     private IEnumerator Explosion()
     {
         yield return new WaitForSeconds(0.2f);
-        foreach (Transform child in bombeRadius.transform)
-        {
-            child.gameObject.SetActive(true);
-            yield return new WaitForSeconds(0.05f);
-        }
-        
-        yield return new WaitForSeconds(0.5f);
+        bombeRadius.SetActive(true);
+        yield return new WaitForSeconds(1f);
         OnKaboom?.Invoke(gameObject);
-    }
+    } 
 
     private void OnTriggerEnter(Collider other)
     {
@@ -71,15 +67,12 @@ public class Bombe : MonoBehaviour
         canBeGrab = true;
         _renderer.enabled = true;
         _renderer.material.color = _baseColor;
-        foreach (Transform child in bombeRadius.transform)
-        {
-            child.gameObject.SetActive(false);
-        }
-        GetComponent<BoxCollider>().enabled = true;
+        bombeRadius.SetActive(false);
+        gameObject.GetComponent<BoxCollider>().enabled = true;
     }
 
     private void OnEnable()
     {
-        bombeAnime.Play("BombeReset");
+        bombeAnime.Play("BombeIdle");
     }
 }
