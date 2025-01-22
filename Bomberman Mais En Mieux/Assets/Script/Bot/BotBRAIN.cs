@@ -53,6 +53,8 @@ public class BotBRAIN : MonoBehaviour
         GetComponent<BotPickup>().OnBotDropBomb += ABombHasBeenPlanted;
         GetComponent<BotPickup>().OnBotPickBomb += BombHasBeenTake;
         WinManager.instance.OnPlayerJoin(gameObject);
+
+        Time.timeScale = 1.0f;
     }
 
     private void Update()
