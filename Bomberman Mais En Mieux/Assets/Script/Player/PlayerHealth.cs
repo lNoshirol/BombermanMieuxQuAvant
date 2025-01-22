@@ -10,8 +10,9 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] TextMeshProUGUI healthUI;
     public int damageMultiplier;
     Collider playerCollider;
-    Renderer playerRenderer;
+    [SerializeField] GameObject playerEnergy;
     Color baseColor;
+    Renderer energyRenderer;
     bool invincible = false;
 
     public event Action<int> OnDamageTakePv;
@@ -31,8 +32,8 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         playerCollider = gameObject.GetComponent<Collider>();
-        playerRenderer = gameObject.GetComponent<Renderer>();
-        baseColor = playerRenderer.material.color;
+        energyRenderer = playerEnergy.GetComponent<Renderer>();
+        baseColor = energyRenderer.material.color;
     }
     public void takeDamage()
     {
@@ -42,6 +43,26 @@ public class PlayerHealth : MonoBehaviour
         OnDamageTakeGameObject?.Invoke(gameObject, pv);
 
         StartCoroutine(Invicibility());
+
+        if (pv == 2)
+        {
+            StartCoroutine(PlayerHasLostHP(0.5f));
+        }
+
+        else if (pv == 1)
+        {
+            StopCoroutine(PlayerHasLostHP(0.5f));
+            StartCoroutine(PlayerHasLostHP(0.25f));
+        }
+
+        else if (pv == 0) {
+            StopCoroutine(PlayerHasLostHP(0.25f));
+            energyRenderer.material.color = Color.gray;
+            gameObject.GetComponent<PlayerMove>().enabled = false;
+
+        }
+
+
     }
 
     private void updateHealthUI()
@@ -52,14 +73,30 @@ public class PlayerHealth : MonoBehaviour
     private IEnumerator Invicibility()
     {
         invincible = true;
-        playerRenderer.material.color = Color.black;
+        energyRenderer.material.color = Color.gray;
         Debug.Log("switchcolor");
         yield return new WaitForSeconds(0.25f);
-        playerRenderer.material.color = baseColor;
+        energyRenderer.material.color = baseColor;
         yield return new WaitForSeconds(0.25f);
-        playerRenderer.material.color = Color.black;
+        energyRenderer.material.color = Color.gray;
         yield return new WaitForSeconds(0.25f);
-        playerRenderer.material.color = baseColor;
+        energyRenderer.material.color = baseColor;
+        energyRenderer.material.color = Color.gray;
+        yield return new WaitForSeconds(0.25f);
+        energyRenderer.material.color = baseColor;
         invincible = false;
+
+
+
+    }
+
+    private IEnumerator PlayerHasLostHP(float time)
+    {
+        while (true) {
+            yield return new WaitForSeconds(time);
+            energyRenderer.material.color = Color.gray;
+            yield return new WaitForSeconds(time);
+            energyRenderer.material.color = baseColor;
+        }
     }
 }

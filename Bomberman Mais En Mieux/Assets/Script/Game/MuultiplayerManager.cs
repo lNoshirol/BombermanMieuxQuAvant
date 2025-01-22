@@ -10,6 +10,8 @@ public class MuultiplayerManager : MonoBehaviour
 
     public int playerThatJoined = 0;
 
+    [SerializeField] GameObject countDown;
+
     public List<Transform> playerSpawnPoint;
     public List<Material> playersMat;
 
@@ -35,5 +37,6 @@ public class MuultiplayerManager : MonoBehaviour
     public void OnJoined()
     {
         playerThatJoined++;
+        countDown.SetActive(true);
     }
 }

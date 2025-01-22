@@ -58,7 +58,7 @@ public class BombPoolObject : MonoBehaviour
         {
             spawnPoint = bombSpawnPointList[UnityEngine.Random.Range(0, bombSpawnPointList.Count)];
         }
-        theBomb.transform.position = spawnPoint.position;
+        theBomb.transform.position = spawnPoint.position + new Vector3(0,1,0);
         theBomb.transform.parent = spawnPoint;
         onBombSpawn?.Invoke(theBomb);
         theBomb.SetActive(true);
