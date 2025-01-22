@@ -334,6 +334,7 @@ MonoBehaviour:
   bombeUI: {fileID: 5483275141015588899}
   playerCanvas: {fileID: 1630766226948195325}
   botBRAIN: {fileID: 0}
+  bombeShowStock: {fileID: 0}
 --- !u!114 &2697661232908750162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,6 +351,9 @@ MonoBehaviour:
   healthUI: {fileID: 6644523104796510440}
   damageMultiplier: 1
   playerEnergy: {fileID: 1046032257268557040}
+  playerBase: {fileID: 0}
+  playerHealthShow: {fileID: 0}
+  playerBombeShow: {fileID: 0}
 --- !u!114 &1139392085207567655
 MonoBehaviour:
   m_ObjectHideFlags: 0
