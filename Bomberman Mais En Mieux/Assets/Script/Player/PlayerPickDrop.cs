@@ -63,7 +63,7 @@ public class PlayerPickDrop : MonoBehaviour
     {
         if (callbackContext.started)
         {
-            if (bombeStock.childCount > 1)
+            if (bombeStock.childCount >= 1)
             {
                 Transform bombeToDrop = bombeStock.GetChild(0);
                 bombeToDrop.parent = null;

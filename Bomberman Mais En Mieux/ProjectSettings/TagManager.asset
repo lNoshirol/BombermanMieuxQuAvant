@@ -8,6 +8,10 @@ TagManager:
   - DamageRadius
   - Bot
   - Wall
+  - Player1
+  - Player2
+  - Player2Base
+  - Player1Base
   layers:
   - Default
   - TransparentFX

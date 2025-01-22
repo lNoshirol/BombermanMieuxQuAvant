@@ -15,8 +15,12 @@ public class PlayerHealth : MonoBehaviour
     Renderer energyRenderer;
     bool invincible = false;
 
+    [SerializeField] GameObject playerBase;
+
     public event Action<int> OnDamageTakePv;
     public event Action<GameObject, int> OnDamageTakeGameObject;
+
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -31,9 +35,18 @@ public class PlayerHealth : MonoBehaviour
 
     private void Start()
     {
+        if(gameObject.tag == "Player")
+        {
+            gameObject.tag = $"Player{MuultiplayerManager.instance.playerThatJoined}" ;
+        }
+        if(gameObject.tag == "Bot")
+        {
+            gameObject.tag = "Player2";
+        }
         playerCollider = gameObject.GetComponent<Collider>();
         energyRenderer = playerEnergy.GetComponent<Renderer>();
         baseColor = energyRenderer.material.color;
+        playerBase = GameObject.FindGameObjectWithTag($"{gameObject.tag}Base");
     }
     public void takeDamage()
     {
@@ -58,7 +71,11 @@ public class PlayerHealth : MonoBehaviour
         else if (pv == 0) {
             StopCoroutine(PlayerHasLostHP(0.25f));
             energyRenderer.material.color = Color.gray;
-            gameObject.GetComponent<PlayerMove>().enabled = false;
+            if (gameObject.GetComponent<PlayerMove>())
+            {
+                gameObject.GetComponent<PlayerMove>().enabled = false;
+            }
+
 
         }
 

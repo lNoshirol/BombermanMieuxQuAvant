@@ -9,7 +9,6 @@ public class CountDown : MonoBehaviour
     [SerializeField] TextMeshProUGUI countdownText;
 
     [SerializeField] float shakeIntensity = 2f;
-    [SerializeField] float shakeDuration = 0.3f;
 
 
     private float currentTime;
