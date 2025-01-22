@@ -268,7 +268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bf51be88356cd249ab84f543a355c89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Multiplayer
+  sceneName: EMultiplayer
 --- !u!1 &73032165
 GameObject:
   m_ObjectHideFlags: 0
@@ -1790,7 +1790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bf51be88356cd249ab84f543a355c89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: Soloplayer
+  sceneName: ESoloplayer
 --- !u!1 &962500046
 GameObject:
   m_ObjectHideFlags: 0
