@@ -47,7 +47,6 @@ public class BotBRAIN : MonoBehaviour
 
 
 
-    // Start is called before the first frame update
     void Start()
     {
         BombPoolObject.instance.onBombSpawn += BombSpawn;

@@ -37,6 +37,11 @@ public class MuultiplayerManager : MonoBehaviour
     public void OnJoined()
     {
         playerThatJoined++;
-        countDown.SetActive(true);
+
+        if (countDown != null)
+        {
+            countDown.SetActive(true);
+        }
+
     }
 }

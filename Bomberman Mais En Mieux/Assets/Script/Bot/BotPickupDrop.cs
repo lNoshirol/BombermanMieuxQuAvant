@@ -15,6 +15,8 @@ public class BotPickup : MonoBehaviour
     public event Action<GameObject> OnBotDropBomb;
     public event Action<GameObject> OnBotPickBomb;
 
+    [SerializeField] Renderer bombeShowStock;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Bombe" && bombeStock.childCount < 3)
@@ -27,7 +29,7 @@ public class BotPickup : MonoBehaviour
 
             OnBotPickBomb?.Invoke(bombe);
 
-            updateBombeUI();
+            addBombeUI();
         }
     }
 
@@ -44,9 +46,37 @@ public class BotPickup : MonoBehaviour
             bombeToDrop.parent = null;
             bombeToDrop.GetComponent<BoxCollider>().enabled = false;
             bombeToDrop.GetComponent<Bombe>().StartExplosion();
-            updateBombeUI();
+            removeBombeUI();
             OnBotDropBomb?.Invoke(bombeToDrop.gameObject);
         }
     }
 
+    private void addBombeUI()
+    {
+        foreach (Transform child in gameObject.GetComponent<PlayerHealth>().playerBombeShow.transform)
+        {
+            if (child.GetComponent<Renderer>().material.color == Color.gray)
+            {
+                bombeShowStock = child.GetComponent<Renderer>();
+                bombeShowStock.material.color = Color.cyan;
+                bombeShowStock.transform.GetChild(0).gameObject.SetActive(true);
+                return;
+            }
+        }
+
+    }
+
+    private void removeBombeUI()
+    {
+        foreach (Transform child in gameObject.GetComponent<PlayerHealth>().playerBombeShow.transform)
+        {
+            if (child.GetComponent<Renderer>().material.color != Color.gray)
+            {
+                bombeShowStock = child.GetComponent<Renderer>();
+                bombeShowStock.material.color = Color.gray;
+                bombeShowStock.transform.GetChild(0).gameObject.SetActive(false);
+                return;
+            }
+        }
+    }
 }

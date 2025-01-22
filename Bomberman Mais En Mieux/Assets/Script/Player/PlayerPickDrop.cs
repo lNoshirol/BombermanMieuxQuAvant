@@ -23,8 +23,12 @@ public class PlayerPickDrop : MonoBehaviour
     private PlayerActions _playerInput;
     private GameObject bombe;
 
+    private GameObject bombeShow;
+
     public event Action<GameObject> OnDropBomb;
     public event Action<GameObject> OnPickBomb;
+
+    [SerializeField] Renderer bombeShowStock;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -35,12 +39,10 @@ public class PlayerPickDrop : MonoBehaviour
             bombe = other.gameObject;
             bombe.GetComponent<Bombe>().canBeGrab = false;
             bombe.GetComponent<BoxCollider>().enabled = false;
-            
-
-
+            addBombeUI();
             OnPickBomb?.Invoke(bombe);
 
-            updateBombeUI();
+            
         }
     }
 
@@ -68,15 +70,39 @@ public class PlayerPickDrop : MonoBehaviour
                 Transform bombeToDrop = bombeStock.GetChild(0);
                 bombeToDrop.parent = null;
                 bombeToDrop.GetComponent<Bombe>().StartExplosion();
-                updateBombeUI();
+                removeBombeUI();
                 OnDropBomb?.Invoke(bombeToDrop.gameObject);
             }
         }
     }
 
-    private void updateBombeUI()
+    private void addBombeUI()
     {
-        bombeUI.text = ($"{bombeStock.childCount}/3");
+        foreach (Transform child in gameObject.GetComponent<PlayerHealth>().playerBombeShow.transform)
+        {
+            if (child.GetComponent<Renderer>().material.color == Color.gray)
+            {
+                bombeShowStock = child.GetComponent<Renderer>();
+                bombeShowStock.material.color = Color.cyan;
+                bombeShowStock.transform.GetChild(0).gameObject.SetActive(true);
+                return;
+            }
+        }
+
+    }
+
+    private void removeBombeUI()
+    {
+        foreach (Transform child in gameObject.GetComponent<PlayerHealth>().playerBombeShow.transform)
+        {
+            if (child.GetComponent<Renderer>().material.color != Color.gray)
+            {
+                bombeShowStock = child.GetComponent<Renderer>();
+                bombeShowStock.material.color = Color.gray;
+                bombeShowStock.transform.GetChild(0).gameObject.SetActive(false);
+                return;
+            }
+        }
     }
 
     public int GetBombNumber()

@@ -15,7 +15,13 @@ public class PlayerHealth : MonoBehaviour
     Renderer energyRenderer;
     bool invincible = false;
 
-    [SerializeField] GameObject playerBase;
+    public GameObject playerBase;
+    public GameObject playerHealthShow;
+    public GameObject playerBombeShow;
+
+    Renderer playerHealthHeart;
+
+
 
     public event Action<int> OnDamageTakePv;
     public event Action<GameObject, int> OnDamageTakeGameObject;
@@ -24,12 +30,9 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "DamageRadius" && !invincible)
+        if (other.gameObject.tag == "DamageRadius" && !invincible && pv!=0)
         {
             takeDamage();
-            updateHealthUI();
-            Debug.Log($"Take damage, health={pv}");
-
         }
     }
 
@@ -47,6 +50,16 @@ public class PlayerHealth : MonoBehaviour
         energyRenderer = playerEnergy.GetComponent<Renderer>();
         baseColor = energyRenderer.material.color;
         playerBase = GameObject.FindGameObjectWithTag($"{gameObject.tag}Base");
+        playerHealthShow = playerBase.transform.GetChild(0).gameObject;
+        playerBombeShow = playerBase.transform.GetChild(1).gameObject;
+
+        foreach (Transform child in playerBombeShow.transform)
+        {
+            child.GetComponent<Renderer>().material.color = Color.gray;
+            child.GetChild(0).gameObject.SetActive(false);
+        }
+
+        searchNewHealthBar();
     }
     public void takeDamage()
     {
@@ -56,6 +69,7 @@ public class PlayerHealth : MonoBehaviour
         OnDamageTakeGameObject?.Invoke(gameObject, pv);
 
         StartCoroutine(Invicibility());
+        StartCoroutine(PlayerBaseLostHp());
 
         if (pv == 2)
         {
@@ -75,11 +89,7 @@ public class PlayerHealth : MonoBehaviour
             {
                 gameObject.GetComponent<PlayerMove>().enabled = false;
             }
-
-
         }
-
-
     }
 
     private void updateHealthUI()
@@ -91,7 +101,6 @@ public class PlayerHealth : MonoBehaviour
     {
         invincible = true;
         energyRenderer.material.color = Color.gray;
-        Debug.Log("switchcolor");
         yield return new WaitForSeconds(0.25f);
         energyRenderer.material.color = baseColor;
         yield return new WaitForSeconds(0.25f);
@@ -102,9 +111,6 @@ public class PlayerHealth : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
         energyRenderer.material.color = baseColor;
         invincible = false;
-
-
-
     }
 
     private IEnumerator PlayerHasLostHP(float time)
@@ -115,5 +121,31 @@ public class PlayerHealth : MonoBehaviour
             yield return new WaitForSeconds(time);
             energyRenderer.material.color = baseColor;
         }
+    }
+
+    private void searchNewHealthBar()
+    {
+        foreach(Transform child in playerHealthShow.transform)
+        {
+            if(child.GetComponent<Renderer>().material.color != Color.gray)
+            {
+                playerHealthHeart = child.GetComponent<Renderer>();
+                return;
+            }
+        }
+    }
+
+    private IEnumerator PlayerBaseLostHp()
+    {
+        playerHealthHeart.material.color = Color.gray;
+        yield return new WaitForSeconds(0.25f);
+        playerHealthHeart.material.color = baseColor;
+        yield return new WaitForSeconds(0.25f);
+        playerHealthHeart.material.color = Color.gray;
+        yield return new WaitForSeconds(0.25f);
+        playerHealthHeart.material.color = baseColor;
+        yield return new WaitForSeconds(0.25f);
+        playerHealthHeart.material.color = Color.gray;
+        searchNewHealthBar();
     }
 }
