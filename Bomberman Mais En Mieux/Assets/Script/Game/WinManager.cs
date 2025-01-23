@@ -59,7 +59,6 @@ public class WinManager : MonoBehaviour
             Time.timeScale = 0;
             winPanel.SetActive(true);
             winText.text += " " + goWinner.name;
-            winPanel.GetComponent<Image>().color = goWinner.GetComponent<MeshRenderer>().material.color;
         }
     }
 

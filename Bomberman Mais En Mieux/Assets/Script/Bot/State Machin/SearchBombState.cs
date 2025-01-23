@@ -12,7 +12,11 @@ public class SearchBombState : IBotState
     {
         _stateMachine = botStateMachine;
         _brain = _stateMachine.botBrain;
-        _playerPickDrop = _brain.player.GetComponent<PlayerPickDrop>();
+        if(_brain.player != null)
+        {
+            _playerPickDrop = _brain.player.GetComponent<PlayerPickDrop>();
+        }
+        
     }
 
     public void StateUpdate()

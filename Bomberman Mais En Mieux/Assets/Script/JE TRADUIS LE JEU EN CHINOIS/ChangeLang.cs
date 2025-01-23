@@ -9,9 +9,14 @@ public class ChangeLang : MonoBehaviour
 
     public void ChangeAllText(string langId)
     {
-        foreach (TradOption text in textToChange)
-        {
-            text.Change(langId);
+        
+            foreach (TradOption text in textToChange)
+            {
+            if (text != null)
+            {
+                text.Change(langId);
+            }
         }
+
     }
 }
