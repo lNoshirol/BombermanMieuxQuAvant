@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Linq;
 using UnityEngine;
-using Codice.CM.WorkspaceServer.Tree;
-using Unity.VisualScripting.YamlDotNet.Core.Tokens;
 
 public class saveLang : MonoBehaviour
 {
