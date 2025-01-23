@@ -32,6 +32,7 @@ public class PlayerPickDrop : MonoBehaviour
 
     [SerializeField] Material elec;
 
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Bombe" && bombeStock.childCount < 3)

@@ -21,6 +21,7 @@ public class PlayerHealth : MonoBehaviour
 
     [SerializeField] Renderer playerHealthHeart;
 
+    [SerializeField] AudioSource takeDamageAudio;
 
 
     public event Action<int> OnDamageTakePv;
@@ -32,6 +33,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (other.gameObject.tag == "DamageRadius" && !invincible && pv!=0)
         {
+            
             takeDamage();
         }
     }
@@ -63,7 +65,9 @@ public class PlayerHealth : MonoBehaviour
     }
     public void takeDamage()
     {
-        pv=pv-damageMultiplier;
+        takeDamageAudio.Play();
+        pv =pv-damageMultiplier;
+        
 
         OnDamageTakePv?.Invoke(pv);
         OnDamageTakeGameObject?.Invoke(gameObject, pv);
@@ -90,11 +94,6 @@ public class PlayerHealth : MonoBehaviour
                 gameObject.GetComponent<PlayerMove>().enabled = false;
             }
         }
-    }
-
-    private void updateHealthUI()
-    {
-        healthUI.text = ($"{pv}");
     }
 
     private IEnumerator Invicibility()

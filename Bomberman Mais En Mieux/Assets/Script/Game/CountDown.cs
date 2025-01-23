@@ -56,10 +56,11 @@ public class CountDown : MonoBehaviour
 
         void CountdownEnded()
         {
+            elec.color = Color.red;
             softMusic.SetActive(false);
             hardMusic.SetActive(true);
-            elec.color = Color.red;
             hardVolume.SetActive(true);
+            PlayerHealthTo1();
         }
 
         void ShakeText()
@@ -72,5 +73,17 @@ public class CountDown : MonoBehaviour
             countdownText.rectTransform.localPosition = originalPosition + shakeOffset;
         }
 
+        void PlayerHealthTo1()
+        {
+            foreach(GameObject player in WinManager.instance.playerAliveList)
+            {
+                while(player.GetComponent<PlayerHealth>().pv != 1)
+                {
+                    player.GetComponent<PlayerHealth>().takeDamage();
+                }
+                
+            }
+            
+        }
     }
 }

@@ -18,6 +18,8 @@ public class BotPickup : MonoBehaviour
     [SerializeField] Renderer bombeShowStock;
 
     [SerializeField] Material elec;
+    
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -28,12 +30,11 @@ public class BotPickup : MonoBehaviour
             bombe.transform.position = bombeStock.position;
             bombe.transform.SetParent(bombeStock);
             bombe.GetComponent<BoxCollider>().enabled = false;
-
             OnBotPickBomb?.Invoke(bombe);
-
             addBombeUI();
         }
     }
+
 
     public void BotDropBomb()
     {

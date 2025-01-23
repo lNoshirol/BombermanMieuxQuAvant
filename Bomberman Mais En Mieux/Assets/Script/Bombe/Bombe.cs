@@ -17,7 +17,13 @@ public class Bombe : MonoBehaviour
     [SerializeField] Animator bombeAnime;
 
     [SerializeField] VisualEffect eletricity;
+    [SerializeField] VisualEffect beam;
     [SerializeField] Material elec;
+
+    [SerializeField] AudioSource bombePickup;
+
+
+
 
     void Awake()
     {
@@ -31,6 +37,7 @@ public class Bombe : MonoBehaviour
     private void Update()
     {
         eletricity.SetVector4("ElecColor", elec.color);
+        beam.SetVector4("CylinderColor", elec.color);
     }
     public void StartExplosion()
     {
@@ -57,9 +64,9 @@ public class Bombe : MonoBehaviour
     {
         if (other.gameObject.tag == "DamageRadius" && other.transform.root.gameObject.GetComponent<Bombe>().canBeGrab)
         {
-            Debug.Log("HAHAIJD");
             StartCoroutine(Explosion());
         }
+        bombePickup.Play();
     }
 
     public void ResetOwnValue()

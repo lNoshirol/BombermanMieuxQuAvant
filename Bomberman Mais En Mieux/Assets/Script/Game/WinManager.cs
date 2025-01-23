@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -46,14 +47,15 @@ public class WinManager : MonoBehaviour
     {
         if (playerAliveList.Count == 1)
         {
-            WinMulti(playerAliveList[0]);
+            StartCoroutine(WinMulti(playerAliveList[0]));
         }
     }
 
-    public void WinMulti(GameObject goWinner)
+    public IEnumerator WinMulti(GameObject goWinner)
     {
         if (winPanel != null)
         {
+            yield return new WaitForSeconds(2f);
             Time.timeScale = 0;
             winPanel.SetActive(true);
             winText.text += " " + goWinner.name;
@@ -73,4 +75,6 @@ public class WinManager : MonoBehaviour
             go.GetComponent<PlayerPickDrop>().enabled = false;
         }
     }
+
+
 }
