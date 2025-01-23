@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MuultiplayerManager : MonoBehaviour
 {
@@ -41,9 +42,11 @@ public class MuultiplayerManager : MonoBehaviour
 
         if (countDown != null)
         {
-            countDown.SetActive(true);
-            softMusic.SetActive(true);
-
+            if(SceneManager.GetActiveScene().name == "ESoloplayer")
+            {
+                countDown.SetActive(true);
+                softMusic.SetActive(true);
+            }
         }
 
     }

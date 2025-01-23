@@ -12,6 +12,9 @@ public class MultiPrestart : MonoBehaviour
 
     public GameObject panelCanStart;
 
+    [SerializeField] GameObject countDown;
+    [SerializeField] GameObject softMusic;
+
     private void Start()
     {
         Time.timeScale = 0;
@@ -24,6 +27,8 @@ public class MultiPrestart : MonoBehaviour
         {
             joinManager.GetComponent<PlayerInputManager>().enabled = false;
             Time.timeScale = 1f;
+               countDown.SetActive(true);
+               softMusic.SetActive(true);
             foreach (GameObject go in gameObjectsToUnactiveAtStart) { go.SetActive(false); }
         }
         else

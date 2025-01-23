@@ -12231,6 +12231,8 @@ MonoBehaviour:
   gameObjectsToUnactiveAtStart:
   - {fileID: 307311113}
   panelCanStart: {fileID: 1199604627}
+  countDown: {fileID: 803412619}
+  softMusic: {fileID: 1844584626}
 --- !u!1 &1250684346
 GameObject:
   m_ObjectHideFlags: 0
