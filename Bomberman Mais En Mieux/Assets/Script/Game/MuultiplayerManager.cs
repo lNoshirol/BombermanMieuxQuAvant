@@ -11,6 +11,7 @@ public class MuultiplayerManager : MonoBehaviour
     public int playerThatJoined = 0;
 
     [SerializeField] GameObject countDown;
+    [SerializeField] GameObject softMusic;
 
     public List<Transform> playerSpawnPoint;
     public List<Material> playersMat;
@@ -41,6 +42,8 @@ public class MuultiplayerManager : MonoBehaviour
         if (countDown != null)
         {
             countDown.SetActive(true);
+            softMusic.SetActive(true);
+
         }
 
     }

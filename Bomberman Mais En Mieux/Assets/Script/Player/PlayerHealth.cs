@@ -19,7 +19,7 @@ public class PlayerHealth : MonoBehaviour
     public GameObject playerHealthShow;
     public GameObject playerBombeShow;
 
-    Renderer playerHealthHeart;
+    [SerializeField] Renderer playerHealthHeart;
 
 
 

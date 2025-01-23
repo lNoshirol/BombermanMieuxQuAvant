@@ -30,6 +30,8 @@ public class PlayerPickDrop : MonoBehaviour
 
     [SerializeField] Renderer bombeShowStock;
 
+    [SerializeField] Material elec;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Bombe" && bombeStock.childCount < 3)
@@ -63,6 +65,7 @@ public class PlayerPickDrop : MonoBehaviour
 
     public void OnDrop(InputAction.CallbackContext callbackContext)
     {
+
         if (callbackContext.started)
         {
             if (bombeStock.childCount >= 1)
@@ -83,7 +86,7 @@ public class PlayerPickDrop : MonoBehaviour
             if (child.GetComponent<Renderer>().material.color == Color.gray)
             {
                 bombeShowStock = child.GetComponent<Renderer>();
-                bombeShowStock.material.color = Color.cyan;
+                bombeShowStock.material = elec;
                 bombeShowStock.transform.GetChild(0).gameObject.SetActive(true);
                 return;
             }

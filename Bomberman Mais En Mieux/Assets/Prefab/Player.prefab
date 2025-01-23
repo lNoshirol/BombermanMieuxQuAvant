@@ -335,6 +335,7 @@ MonoBehaviour:
   playerCanvas: {fileID: 1630766226948195325}
   botBRAIN: {fileID: 0}
   bombeShowStock: {fileID: 0}
+  elec: {fileID: 2100000, guid: cea2d15357d36834486f0a00a3da8b62, type: 2}
 --- !u!114 &2697661232908750162
 MonoBehaviour:
   m_ObjectHideFlags: 0

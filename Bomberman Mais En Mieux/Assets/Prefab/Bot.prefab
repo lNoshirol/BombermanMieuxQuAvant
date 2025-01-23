@@ -1304,6 +1304,8 @@ MonoBehaviour:
   bombeStock: {fileID: 3281463308901084116}
   botFindBombe: {fileID: 857009182195064109}
   bombeUI: {fileID: 4118876108246191363}
+  bombeShowStock: {fileID: 0}
+  elec: {fileID: 2100000, guid: cea2d15357d36834486f0a00a3da8b62, type: 2}
 --- !u!114 &7314664164718010384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1320,6 +1322,9 @@ MonoBehaviour:
   healthUI: {fileID: 6627333504487935859}
   damageMultiplier: 1
   playerEnergy: {fileID: 4850394299608676577}
+  playerBase: {fileID: 0}
+  playerHealthShow: {fileID: 0}
+  playerBombeShow: {fileID: 0}
 --- !u!114 &857009182195064109
 MonoBehaviour:
   m_ObjectHideFlags: 0

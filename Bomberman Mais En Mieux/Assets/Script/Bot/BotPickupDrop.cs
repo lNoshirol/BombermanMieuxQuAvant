@@ -17,6 +17,8 @@ public class BotPickup : MonoBehaviour
 
     [SerializeField] Renderer bombeShowStock;
 
+    [SerializeField] Material elec;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Bombe" && bombeStock.childCount < 3)
@@ -31,11 +33,6 @@ public class BotPickup : MonoBehaviour
 
             addBombeUI();
         }
-    }
-
-    private void updateBombeUI()
-    {
-        bombeUI.text = ($"{bombeStock.childCount}/3");
     }
 
     public void BotDropBomb()
@@ -58,7 +55,7 @@ public class BotPickup : MonoBehaviour
             if (child.GetComponent<Renderer>().material.color == Color.gray)
             {
                 bombeShowStock = child.GetComponent<Renderer>();
-                bombeShowStock.material.color = Color.cyan;
+                bombeShowStock.material = elec;
                 bombeShowStock.transform.GetChild(0).gameObject.SetActive(true);
                 return;
             }

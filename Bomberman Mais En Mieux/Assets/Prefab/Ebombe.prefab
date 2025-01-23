@@ -204,6 +204,8 @@ MonoBehaviour:
   canBeGrab: 1
   bombeRadius: {fileID: 6015380886826199736}
   bombeAnime: {fileID: 4158859960145205950}
+  eletricity: {fileID: 1545854874876325932}
+  elec: {fileID: 2100000, guid: cea2d15357d36834486f0a00a3da8b62, type: 2}
 --- !u!65 &1389856786530725526
 BoxCollider:
   m_ObjectHideFlags: 0

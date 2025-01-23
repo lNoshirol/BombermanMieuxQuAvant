@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.VFX;
 public class Bombe : MonoBehaviour
 {
     [SerializeField] List<Transform> radius = new List<Transform>();
@@ -15,7 +16,9 @@ public class Bombe : MonoBehaviour
 
     [SerializeField] Animator bombeAnime;
 
-    // Start is called before the first frame update
+    [SerializeField] VisualEffect eletricity;
+    [SerializeField] Material elec;
+
     void Awake()
     {
         foreach (Transform child in transform)
@@ -23,9 +26,12 @@ public class Bombe : MonoBehaviour
         _renderer = gameObject.GetComponent<Renderer>();
         _baseColor = _renderer.material.color;
 
-        //StartCoroutine(StartExplosion());
     }
 
+    private void Update()
+    {
+        eletricity.SetVector4("ElecColor", elec.color);
+    }
     public void StartExplosion()
     {
         StartCoroutine(WaitAndExplosion());
@@ -35,12 +41,7 @@ public class Bombe : MonoBehaviour
     {
         transform.rotation = Quaternion.identity;
         bombeAnime.Play("BombeExplode");
-
-        //for (int i = 1; i > 0; i--)
-        //{
-        //Debug.Log($"Explosion dans {i}...");
         yield return new WaitForSeconds(1f);
-        //}
         StartCoroutine(Explosion());
     }
 
