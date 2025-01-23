@@ -7642,7 +7642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 378281c3bf3970d44a7d5f8b4e192802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countdownTime: 8
+  countdownTime: 61
   countdownText: {fileID: 803412621}
   shakeIntensity: 2
   softMusic: {fileID: 1787718693}
