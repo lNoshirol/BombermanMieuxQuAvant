@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Device;
 using UnityEngine.VFX;
+
 public class Bombe : MonoBehaviour
 {
     [SerializeField] List<Transform> radius = new List<Transform>();
@@ -20,6 +22,9 @@ public class Bombe : MonoBehaviour
     [SerializeField] Material elec;
 
     [SerializeField] AudioSource bombePickup;
+
+
+    [SerializeField] float powerAmount;
 
 
 
@@ -81,4 +86,6 @@ public class Bombe : MonoBehaviour
     {
         bombeAnime.Play("BombeIdle");
     }
+
+        
 }

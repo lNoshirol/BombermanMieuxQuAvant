@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using NUnit.Framework;
+using UnityEngine;
 using UnityEngine.TestTools;
 
-public class TestEmrys
+public class TestEmrysPlayMode
 {
     [Test]
     public void Multiplication_ShouldWork()
